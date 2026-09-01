@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pereira se levanta</title>
+<meta name="description" content="Feria de Marcas y Pequeñas Empresas del Eje Cafetero. Conoce las marcas que participan; cada compra apoya al comercio local y a las familias afectadas por el terremoto.">
+<meta property="og:title" content="Pereira se levanta — Feria de Marcas y Pequeñas Empresas">
+<meta property="og:description" content="Conoce las marcas del Eje Cafetero que participan. Cada visita y cada compra apoya al comercio local y a las familias afectadas por el terremoto.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14130E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%2314130E'/%3E%3Cpath%20d='M16%205c-6%205-6%2017%200%2022'%20stroke='%23F26350'%20stroke-width='3.4'%20fill='none'%20stroke-linecap='round'/%3E%3Cellipse%20cx='16'%20cy='16'%20rx='7'%20ry='10'%20stroke='%23E0B24A'%20stroke-width='2'%20fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* La página siempre se ve en modo oscuro. */
+  :root {
+    color-scheme: dark;
+    --paper:      #14130E;
+    --surface:    #1D1B15;
+    --surface-2:  #26231B;
+    --ink:        #EDEADF;
+    --muted:      #9C9786;
+    --line:       #37332A;
+    --accent:     #F26350;
+    --accent-ink: #1C1A15;
+    --accent-2:   #E0B24A;
+    --shadow-rgb: 0 0 0;
+    --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
+    --font-head: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
+    --font-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --maxw: 1140px;
+    --radius: 7px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* Logo mark */
+  .logo-mark { display: inline-block; line-height: 0; flex: none; }
+  .logo-mark svg, .logo-mark img { display: block; width: 100%; height: 100%; border-radius: 50%; }
+  .logo-mark.sm { width: 34px; height: 34px; }
+  .logo-mark.md { width: 46px; height: 46px; }
+  .logo-mark.lg { width: 88px; height: 88px; }
+
+  /* Top bar */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 20px; }
+  .topbar-brand { display: flex; align-items: center; gap: 11px; }
+  .brandline { display: flex; flex-direction: column; line-height: 1.25; font-family: var(--font-mono); }
+  .brandline b { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); }
+  .brand-sub { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+  .ig-btn {
+    flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px;
+    border: 1px solid var(--line); border-radius: 9px; color: var(--muted); text-decoration: none;
+    transition: color .14s ease, border-color .14s ease;
+  }
+  .ig-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Masthead */
+  .masthead {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+    padding: clamp(28px, 6vw, 56px) 0 clamp(24px, 4vw, 40px); border-bottom: 1px solid var(--line);
+  }
+  .masthead-main { flex: 1 1 420px; }
+  .kicker {
+    margin: 0 0 18px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .wordmark {
+    margin: 0; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+    line-height: 0.9; letter-spacing: -0.03em; display: flex; flex-direction: column;
+  }
+  .wordmark .l1 { font-size: clamp(2.7rem, 11vw, 6.3rem); }
+  .wordmark .l2 { font-size: clamp(1.5rem, 6vw, 3.3rem); color: var(--accent); letter-spacing: -0.02em; }
+  .slogan {
+    margin: 16px 0 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent-2);
+  }
+  .run { margin: 14px 0 0; font-family: var(--font-mono); font-size: clamp(13px, 1.7vw, 15px); letter-spacing: 0.04em; color: var(--ink); }
+  .run .dot { color: var(--accent-2); padding: 0 8px; }
+  .lede { margin: 18px 0 0; max-width: 56ch; font-size: clamp(15px, 2vw, 17px); color: var(--muted); }
+  .lede p { margin: 0; }
+  .lede p + p { margin-top: 10px; }
+
+  /* Flag */
+  .flag-fig { margin: 0; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .flag {
+    width: clamp(96px, 14vw, 128px); height: auto; aspect-ratio: 3 / 2; display: block;
+    border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 10px 24px -14px rgb(var(--shadow-rgb) / 0.55);
+  }
+  .flag-fig figcaption {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* Toolbar */
+  .toolbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); margin-top: 4px;
+  }
+  .toolbar-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; }
+  .field {
+    display: flex; align-items: center; gap: 8px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 0 12px; height: 42px;
+  }
+  .field:focus-within { border-color: var(--accent); }
+  .field svg { flex: none; color: var(--muted); }
+  .field input, .field select {
+    border: 0; background: transparent; color: var(--ink); font-family: var(--font-body);
+    font-size: 14px; height: 100%; outline: none; min-width: 0;
+  }
+  .field select { cursor: pointer; padding-right: 4px; }
+  .field.search { flex: 1 1 240px; }
+  .field option { background: var(--surface); color: var(--ink); }
+  .count {
+    margin-left: auto; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  }
+  .count b { color: var(--ink); }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 16px; padding: 28px 0 10px; }
+  .grid-note {
+    grid-column: 1 / -1; padding: 50px 0; text-align: center; color: var(--muted);
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.03em;
+  }
+  .card {
+    position: relative; display: flex; flex-direction: column; gap: 14px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 16px;
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    animation: rise .4s ease both; animation-delay: calc(var(--i, 0) * 28ms);
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 28px -14px rgb(var(--shadow-rgb) / 0.4); }
+  .card:focus-within { border-color: var(--accent); }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .cover {
+    position: relative; margin: -16px -16px 0; aspect-ratio: 16 / 10; overflow: hidden;
+    border-radius: var(--radius) var(--radius) 0 0; border-bottom: 1px solid var(--line);
+  }
+  .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+    background: color-mix(in srgb, var(--c) 20%, var(--surface));
+    color: color-mix(in srgb, var(--c) 65%, var(--ink));
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  .card-top { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    flex: none; width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center;
+    font-family: var(--font-display); font-size: 14px; letter-spacing: -0.02em; color: #fff; text-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  }
+  .card-open {
+    appearance: none; background: none; border: 0; padding: 0; margin: 0; font-family: var(--font-head);
+    font-weight: 600; font-size: 16px; line-height: 1.2; color: var(--ink); text-align: left; cursor: pointer;
+  }
+  .card-open::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius); }
+  .brand-city {
+    display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 11.5px;
+    letter-spacing: 0.03em; color: var(--muted); margin-top: 3px;
+  }
+  .card-body { border-top: 1px dashed var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .prod-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .prod-name { font-size: 15px; font-weight: 500; line-height: 1.35; }
+  .card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .tag {
+    position: relative; margin: 0; background: var(--accent); color: var(--accent-ink); font-family: var(--font-mono);
+    font-weight: 500; font-size: 13px; letter-spacing: 0.02em; padding: 6px 12px 6px 20px; border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tag::before {
+    content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: var(--surface);
+  }
+  .ig {
+    position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono);
+    font-size: 11.5px; color: var(--muted); text-decoration: none; border: 1px solid var(--line);
+    border-radius: 100px; padding: 4px 10px; transition: color .14s ease, border-color .14s ease;
+  }
+  .ig:hover { color: var(--accent); border-color: var(--accent); }
+
+  .empty { padding: 60px 0 80px; text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; }
+  .empty[hidden] { display: none; }
+
+  /* Dialogs */
+  dialog {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink);
+    padding: 0; max-width: 440px; width: calc(100vw - 40px); max-height: calc(100dvh - 32px); overflow: auto;
+  }
+  dialog::backdrop { background: rgb(var(--shadow-rgb) / 0.55); backdrop-filter: blur(3px); }
+  dialog[open] { animation: dlg .28s ease both; }
+  @keyframes dlg { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
+
+  #intro { max-width: 520px; text-align: center; }
+  .intro-inner { padding: 32px clamp(22px, 5vw, 34px) 24px; }
+  #intro .logo-mark.lg { margin: 0 auto 14px; }
+  .intro-slogan {
+    margin: 0 0 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent-2);
+  }
+  #introTitle {
+    margin: 0 0 18px; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+    font-size: clamp(1.7rem, 6vw, 2.4rem); letter-spacing: -0.02em; line-height: 1;
+  }
+  .intro-body { text-align: left; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+  .intro-body b { color: var(--accent); }
+  .intro-cta {
+    margin-top: 22px; width: 100%; padding: 13px 18px; border: 0; border-radius: 8px; background: var(--accent);
+    color: var(--accent-ink); font-family: var(--font-head); font-weight: 600; font-size: 15px; cursor: pointer; transition: filter .14s ease;
+  }
+  .intro-cta:hover { filter: brightness(1.06); }
+  .intro-skip {
+    margin-top: 10px; background: none; border: 0; color: var(--muted); font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.03em; cursor: pointer; text-decoration: underline;
+  }
+  .intro-credit {
+    margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed var(--line); font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.06em; color: var(--muted);
+  }
+  .intro-credit b { color: var(--ink); }
+
+  .modal-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .modal-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .modal-cover .ph {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+    background: color-mix(in srgb, var(--c) 20%, var(--surface));
+    color: color-mix(in srgb, var(--c) 65%, var(--ink));
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .modal-pad { padding: 24px; }
+  .modal-top { display: flex; align-items: center; gap: 14px; padding-right: 34px; }
+  .modal-top .logo { width: 52px; height: 52px; font-size: 17px; border-radius: 13px; }
+  .modal-name { font-family: var(--font-head); font-weight: 700; font-size: 20px; line-height: 1.15; }
+  .modal-city { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+  .modal-row { margin-top: 20px; }
+  .modal-row .prod-label { display: block; margin-bottom: 6px; }
+  .modal-prod { font-size: 17px; font-weight: 500; line-height: 1.4; }
+  .modal-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+  .modal-foot {
+    margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .modal-foot .prod-label { display: block; margin-bottom: 6px; }
+  .close-btn {
+    position: absolute; top: 12px; right: 12px; z-index: 3; width: 32px; height: 32px; display: grid; place-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px; color: var(--ink); cursor: pointer; font-size: 15px; line-height: 1;
+  }
+  .close-btn:hover { border-color: var(--accent); }
+
+  /* Forms (inscripción + panel) */
+  #inscribir { max-width: 460px; }
+  .insc-title { margin: 0 0 6px; padding-right: 30px; font-family: var(--font-head); font-weight: 700; font-size: 20px; }
+  .insc-hint { margin: 0 0 18px; font-size: 13px; color: var(--muted); }
+  .insc-form { display: flex; flex-direction: column; gap: 13px; }
+  .fld { display: flex; flex-direction: column; gap: 5px; }
+  .fld span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .fld input {
+    font-family: var(--font-body); font-size: 14px; color: var(--ink); background: var(--surface-2);
+    border: 1px solid var(--line); border-radius: 7px; padding: 9px 11px; outline: none; width: 100%;
+  }
+  .fld input:focus { border-color: var(--accent); }
+  .fld input[type="color"] { height: 38px; padding: 3px; cursor: pointer; }
+  .fld-row { display: flex; gap: 12px; }
+  .fld-row .fld { flex: 1; min-width: 0; }
+
+  #admin { max-width: 500px; }
+  .adm-tabs { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .adm-tab {
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted); background: none; border: 0;
+    border-bottom: 2px solid transparent; padding: 4px 2px; cursor: pointer;
+  }
+  .adm-tab.is-active { color: var(--ink); border-bottom-color: var(--accent); }
+  .adm-badge { background: var(--accent); color: var(--accent-ink); border-radius: 100px; font-size: 10px; padding: 1px 6px; margin-left: 4px; }
+  .adm-logout {
+    margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--muted); background: none;
+    border: 1px solid var(--line); border-radius: 100px; padding: 3px 10px; cursor: pointer;
+  }
+  .adm-logout:hover { color: var(--accent); border-color: var(--accent); }
+  .adm-msg { margin: 12px 0 0; font-size: 12px; color: var(--muted); font-family: var(--font-mono); min-height: 1em; }
+  .adm-err { margin: 4px 0 0; font-size: 12px; color: var(--accent); font-family: var(--font-mono); }
+  .adm-list { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); display: flex; flex-direction: column; gap: 4px; max-height: 220px; overflow: auto; }
+  .adm-list-tall { max-height: 360px; border-top: 0; padding-top: 0; }
+  .adm-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+  .adm-row > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .adm-row button, .adm-insc-actions button {
+    flex: none; font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); background: none;
+    border: 1px solid var(--line); border-radius: 100px; padding: 3px 9px; cursor: pointer;
+  }
+  .adm-row button:hover, .adm-insc-actions button:hover { color: var(--accent); border-color: var(--accent); }
+  .adm-row button.adm-confirm, .adm-insc-actions button.adm-confirm { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .adm-insc { display: flex; flex-direction: column; gap: 4px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .adm-insc-h { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .adm-insc-h b { font-family: var(--font-head); }
+  .adm-insc-h time { font-family: var(--font-mono); font-size: 10px; color: var(--muted); flex: none; }
+  .adm-insc-meta { color: var(--muted); font-size: 12px; }
+  .adm-insc-actions { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+  .adm-insc.estado-aprobada, .adm-insc.estado-archivada { opacity: .5; }
+
+  /* Buttons */
+  .btn-solid {
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border: 0; border-radius: 8px;
+    background: var(--accent); color: var(--accent-ink); font-family: var(--font-head); font-weight: 600;
+    font-size: 13.5px; text-decoration: none; white-space: nowrap; transition: filter .14s ease;
+  }
+  .btn-solid:hover { filter: brightness(1.06); }
+  .btn-solid[disabled] { opacity: .6; cursor: default; }
+  .btn-solid, .btn-ghost { cursor: pointer; }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 8px;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--line); font-family: var(--font-mono);
+    font-size: 12.5px; text-decoration: none; white-space: nowrap; transition: border-color .14s ease, color .14s ease;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .join {
+    margin: 24px 0 4px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+    display: flex; align-items: center; justify-content: space-between; gap: 14px 22px; flex-wrap: wrap;
+  }
+  .join p { margin: 0; font-size: 14px; max-width: 62ch; }
+  .join b { font-family: var(--font-head); }
+
+  .actions {
+    margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px 36px;
+  }
+  .action-col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .share { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+  @media (max-width: 640px) { .actions { grid-template-columns: 1fr; gap: 26px; } }
+  .trans-eyebrow {
+    margin: 0 0 5px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent-2);
+  }
+  .trans-text { margin: 0; max-width: 54ch; font-size: 14px; color: var(--muted); }
+
+  footer {
+    margin-top: 40px; border-top: 1px solid var(--line); padding: 28px 0 48px; display: flex; flex-wrap: wrap;
+    gap: 20px 32px; justify-content: space-between; align-items: flex-start; font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.03em; color: var(--muted);
+  }
+  .foot-brand { display: flex; align-items: center; gap: 12px; }
+  .foot-brand b { color: var(--ink); font-family: var(--font-head); letter-spacing: 0; font-size: 13px; }
+  .foot-meta { display: flex; flex-direction: column; gap: 6px; max-width: 44ch; text-align: right; margin-left: auto; }
+  .foot-link { background: none; border: 0; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; align-self: flex-end; }
+  .foot-link:hover { color: var(--accent); }
+
+  @media (max-width: 560px) { .foot-meta { text-align: left; margin-left: 0; } .foot-link { align-self: flex-start; } }
+  @media (max-width: 520px) { .count { margin-left: 0; width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="topbar-brand">
+      <span class="logo-mark sm" data-logo></span>
+      <span class="brandline">
+        <span class="brand-sub">Una idea de</span>
+        <b>Kevin Sachica</b>
+      </span>
+      <a class="ig-btn" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Abrir el Instagram de Kevin Sachica">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
+        </svg>
+      </a>
+    </span>
+  </div>
+
+  <header class="masthead">
+    <div class="masthead-main">
+      <p class="kicker">Feria de marcas · Pereira, Risaralda</p>
+      <h1 class="wordmark">
+        <span class="l1">Pereira</span>
+        <span class="l2">se levanta</span>
+      </h1>
+      <p class="slogan">La querendona, trasnochadora y morena</p>
+      <p class="run">
+        Pereira, Risaralda <span class="dot">·</span> Eje Cafetero <span class="dot">·</span> Entrada libre
+      </p>
+      <div class="lede">
+        <p>Aquí vas a conocer las marcas y pequeñas empresas que hacen parte de esta iniciativa.
+           Cada una aporta su trabajo y destina una parte de cada venta a comprar materiales de
+           construcción y a apoyar a las familias afectadas por el terremoto.</p>
+        <p>Es un proyecto sin ánimo de lucro y 100% transparente: vamos a documentar cada paso
+           para que tengas total tranquilidad de a dónde llega tu compra. Todo, por amor a
+           nuestra ciudad y a nuestra gente.</p>
+      </div>
+    </div>
+
+    <figure class="flag-fig">
+      <svg class="flag" viewBox="0 0 90 60" role="img" aria-label="Bandera de Pereira">
+        <rect width="90" height="60" fill="#D8322A"/>
+        <polygon points="0,0 90,0 45,60" fill="#F5C400"/>
+        <path d="M35,31 C33,22 35.5,13.5 46,12.5 C54.5,11.7 59,15 59,19 C54.5,17.8 50.5,19 48.5,23
+                 C51.5,24.2 53.5,27 53.5,30.5 C48,32.8 40,32.8 35,31 Z" fill="#D8322A"/>
+        <circle cx="47" cy="12" r="2.1" fill="#D8322A"/>
+      </svg>
+      <figcaption>Bandera de Pereira</figcaption>
+    </figure>
+  </header>
+</div>
+
+<div class="toolbar">
+  <div class="wrap toolbar-inner">
+    <label class="field search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input id="q" type="search" placeholder="Buscar marca o producto…" autocomplete="off">
+    </label>
+
+    <label class="field">
+      <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden="true">
+        <path d="M7 1C4.2 1 2 3.1 2 5.7 2 9.2 7 15 7 15s5-5.8 5-9.3C12 3.1 9.8 1 7 1z" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="7" cy="5.6" r="1.8" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <select id="city" aria-label="Filtrar por ciudad"></select>
+    </label>
+
+    <label class="field">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M4 3v10M4 13l-2-2M4 13l2-2M11 13V3M11 3l-2 2M11 3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <select id="sort" aria-label="Ordenar">
+        <option value="destacadas">Destacadas</option>
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+        <option value="nombre">Nombre A–Z</option>
+      </select>
+    </label>
+
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="join">
+    <p><b>¿Tienes una marca del Eje Cafetero?</b> Llena el formulario y tus datos le llegan
+       al equipo organizador, que te contacta para confirmar la participación.</p>
+    <button class="btn-solid" id="btnInscribir" type="button">Inscribir mi marca →</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>No hay marcas que coincidan con la búsqueda.</p>
+
+  <section class="actions">
+    <div class="action-col">
+      <p class="trans-eyebrow">Seguimiento y transparencia</p>
+      <p class="trans-text">Proyecto sin ánimo de lucro. Publicamos cada compra de materiales
+         y cada entrega a las familias, paso a paso.</p>
+      <a class="btn-ghost" data-seguimiento href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
+        </svg>
+        Ver el seguimiento
+      </a>
+    </div>
+    <div class="action-col">
+      <p class="trans-eyebrow">Ayuda a difundir</p>
+      <p class="trans-text">Entre más gente conozca la feria, más marcas y más familias reciben
+         apoyo. Comparte el enlace donde quieras.</p>
+      <div class="share">
+        <a class="btn-ghost" id="shWpp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a class="btn-ghost" id="shFb" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <button class="btn-ghost" id="shCopy" type="button">Copiar enlace</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-brand">
+      <span class="logo-mark md" data-logo></span>
+      <span>
+        <b>Pereira se levanta</b><br>
+        Una idea de Kevin Sachica
+      </span>
+    </div>
+    <div class="foot-meta">
+      <span>Iniciativa para reactivar el comercio y apoyar a las familias afectadas por el terremoto.</span>
+      <span>Contacto: info@pereiraselevanta.co</span>
+      <button class="foot-link" id="admOpen" type="button">Organizadores</button>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== Mensaje de bienvenida ===== -->
+<dialog id="intro" aria-labelledby="introTitle">
+  <div class="intro-inner">
+    <span class="logo-mark lg" data-logo></span>
+    <p class="intro-slogan">Pereira · la querendona, trasnochadora y morena</p>
+    <h2 id="introTitle">Pereira se levanta</h2>
+    <div class="intro-body">
+      <p>El himno de la ciudad lo cuenta bien: Pereira se hizo a pulso, abriendo monte con hacha
+         y levantando casas a punta de martillo.</p>
+      <p>Así nació esta ciudad: abriéndose paso a golpes, construyéndose con sus propias manos.
+         Hoy, después del terremoto, el Eje Cafetero vuelve a hacer lo mismo.</p>
+      <p>Por eso te invitamos a la <b>Feria de Marcas y Pequeñas Empresas</b>: cada visita, cada
+         compra y cada aporte es un golpe más de hacha, un martillazo más en esta nueva
+         reconstrucción.</p>
+      <p>Reactiva el comercio local y ayuda a recoger fondos para las familias afectadas.</p>
+    </div>
+    <button class="intro-cta" id="introClose" type="button">Conócelas aquí →</button>
+    <button class="intro-skip" id="introSkip" type="button">No volver a mostrar este mensaje</button>
+    <p class="intro-credit">Una idea de <b>Kevin Sachica</b></p>
+  </div>
+</dialog>
+
+<!-- ===== Inscripción de marca ===== -->
+<dialog id="inscribir" aria-labelledby="inscTitle">
+  <button class="close-btn" id="inscClose" type="button" aria-label="Cerrar">✕</button>
+  <form class="modal-pad insc-form" id="inscForm">
+    <h2 id="inscTitle" class="insc-title">Inscribe tu marca</h2>
+    <p class="insc-hint">Déjanos tus datos. El equipo organizador revisa cada inscripción y te
+       contacta para confirmar.</p>
+
+    <label class="fld"><span>Nombre de la marca *</span>
+      <input name="marca" type="text" required autocomplete="organization"></label>
+    <label class="fld"><span>Ciudad *</span>
+      <input name="ciudad" type="text" required></label>
+    <label class="fld"><span>Producto con el que participas *</span>
+      <input name="producto" type="text" required></label>
+    <label class="fld"><span>Precio del producto *</span>
+      <input name="precio" type="text" inputmode="numeric" required placeholder="Ej: 60000"></label>
+    <label class="fld"><span>Instagram de la marca</span>
+      <input name="instagram" type="text" placeholder="@tumarca"></label>
+    <label class="fld"><span>Tu nombre y teléfono *</span>
+      <input name="contacto" type="text" required></label>
+
+    <button class="btn-solid" style="justify-content:center" type="submit">Enviar inscripción</button>
+    <p class="adm-msg" id="inscMsg"></p>
+  </form>
+</dialog>
+
+<!-- ===== Detalle de cada marca ===== -->
+<dialog id="modal">
+  <button class="close-btn" id="closeBtn" type="button" aria-label="Cerrar">✕</button>
+  <div id="modalInner"></div>
+</dialog>
+
+<!-- ===== Panel del organizador ===== -->
+<dialog id="admin" aria-labelledby="admTitle">
+  <button class="close-btn" id="admClose" type="button" aria-label="Cerrar">✕</button>
+  <div class="modal-pad">
+    <h2 id="admTitle" class="insc-title">Panel del organizador</h2>
+
+    <form class="insc-form" id="admLogin" hidden>
+      <p class="insc-hint">Ingresa con tu correo y contraseña de organizador.</p>
+      <label class="fld"><span>Correo</span><input name="email" type="email" required autocomplete="username"></label>
+      <label class="fld"><span>Contraseña</span><input name="password" type="password" required autocomplete="current-password"></label>
+      <button class="btn-solid" style="justify-content:center" type="submit">Entrar</button>
+      <p class="adm-err" id="admLoginErr" hidden></p>
+    </form>
+
+    <div id="admPanel" hidden>
+      <div class="adm-tabs">
+        <button type="button" class="adm-tab is-active" data-tab="marcas">Marcas</button>
+        <button type="button" class="adm-tab" data-tab="inscripciones">Inscripciones <span class="adm-badge" id="admBadge" hidden>0</span></button>
+        <button type="button" class="adm-logout" id="admLogout">Salir</button>
+      </div>
+
+      <div class="adm-view" data-view="marcas">
+        <form class="insc-form" id="admForm">
+          <label class="fld"><span>Nombre *</span><input name="nombre" type="text" required></label>
+          <label class="fld"><span>Ciudad *</span><input name="ciudad" type="text" required></label>
+          <label class="fld"><span>Producto *</span><input name="producto" type="text" required></label>
+          <label class="fld"><span>Precio (solo número) *</span><input name="precio" type="text" inputmode="numeric" required placeholder="60000"></label>
+          <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
+          <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
+          <div class="fld-row">
+            <label class="fld"><span>Color</span><input name="color" type="color" value="#8E3B46"></label>
+            <label class="fld"><span>Foto (opcional)</span><input name="imagen" type="file" accept="image/*"></label>
+          </div>
+          <button class="btn-solid" style="justify-content:center" id="admSave" type="submit">Agregar marca</button>
+        </form>
+        <p class="adm-msg" id="admMsg"></p>
+        <div class="adm-list" id="admMarcasList"></div>
+      </div>
+
+      <div class="adm-view" data-view="inscripciones" hidden>
+        <p class="adm-msg" id="admInscMsg">Cargando…</p>
+        <div class="adm-list adm-list-tall" id="admInscList"></div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+/* ============================================================
+   CONFIGURACIÓN — pega aquí los datos de tu proyecto Supabase
+   (Supabase → Settings → API)
+   ============================================================ */
+const SUPABASE_URL = "https://yvmuonhrffniuzthcbtc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_J-PG7cT__mZ60Mg8Ut_Yug_nmqC52CA";
+const MONEDA = "COP"; // "MXN", "USD", "PEN", "CLP"...
+const ENLACE_SEGUIMIENTO = "https://www.instagram.com/kevinsachica_";
+/* ============================================================ */
+
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+document.documentElement.setAttribute("data-theme", "dark");
+
+/* ---------- Logo ---------- */
+const LOGO = `
+  <svg viewBox="0 0 120 120" role="img" aria-label="Pereira se levanta" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="59" fill="#F0E6D5"/>
+    <g stroke="#3C6B3E" stroke-width="2.4" stroke-linecap="round" fill="none">
+      <path d="M83 98 q11 -3 19 -15"/><path d="M28 96 q-9 -4 -14 -14"/>
+    </g>
+    <g fill="#3C6B3E">
+      <ellipse cx="92" cy="90" rx="6.5" ry="3.6" transform="rotate(-26 92 90)"/>
+      <ellipse cx="101" cy="81" rx="6.5" ry="3.6" transform="rotate(-26 101 81)"/>
+      <ellipse cx="21" cy="88" rx="6" ry="3.4" transform="rotate(24 21 88)"/>
+    </g>
+    <g fill="#C6382E"><circle cx="87" cy="95" r="2.7"/><circle cx="95" cy="98" r="2.7"/><circle cx="16" cy="92" r="2.5"/></g>
+    <ellipse cx="59" cy="66" rx="25" ry="33" fill="#5B3A24"/>
+    <path d="M59 34 C 67 46, 51 57, 60 68 C 69 79, 53 89, 58 98" stroke="#C89B6A" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+    <circle cx="51" cy="61" r="2.7" fill="#241A12"/><circle cx="67" cy="61" r="2.7" fill="#241A12"/>
+    <path d="M50 69 q9 8 18 0" stroke="#241A12" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="60" cy="42" rx="35" ry="10" fill="#D9A94E"/>
+    <path d="M25 42 a35 10 0 0 0 70 0" fill="#C4913F"/>
+    <path d="M42 43 C 42 24, 78 24, 78 43 Z" fill="#E7C078"/>
+    <path d="M42 41 C 50 46, 70 46, 78 41 L 78 44 C 70 49, 50 49, 42 44 Z" fill="#6E4A2C"/>
+  </svg>`;
+document.querySelectorAll("[data-logo]").forEach((el) => { el.innerHTML = LOGO; });
+
+/* ---------- Helpers ---------- */
+const fmtPrecio = (n) =>
+  new Intl.NumberFormat("es-CO", { style: "currency", currency: MONEDA, maximumFractionDigits: 0 }).format(Number(n) || 0);
+const norm = (s) => (s || "").normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+const initials = (name) =>
+  (name || "?").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+const esc = (s) =>
+  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function igUrl(v) {
+  if (!v) return "";
+  v = v.trim();
+  return /^https?:\/\//i.test(v) ? v : "https://instagram.com/" + v.replace(/^@/, "");
+}
+function igLabel(v) {
+  if (!v) return "";
+  const h = v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[/?#].*$/, "").replace(/^@/, "");
+  return "@" + h;
+}
+const pinSvg =
+  '<svg width="11" height="12" viewBox="0 0 14 16" fill="none" aria-hidden="true">' +
+  '<path d="M7 1C4.2 1 2 3.1 2 5.7 2 9.2 7 15 7 15s5-5.8 5-9.3C12 3.1 9.8 1 7 1z" stroke="currentColor" stroke-width="1.6"/>' +
+  '<circle cx="7" cy="5.6" r="1.7" stroke="currentColor" stroke-width="1.6"/></svg>';
+const camSvg =
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+  '<path d="M4 8h3l1.5-2h7L18 8h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/>' +
+  '<circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.5"/></svg>';
+const igSvg =
+  '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+  '<rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>' +
+  '<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>' +
+  '<circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>';
+
+/* ---------- Estado ---------- */
+let MARCAS = [];
+
+const grid = document.getElementById("grid");
+const empty = document.getElementById("empty");
+const countEl = document.getElementById("count");
+const qEl = document.getElementById("q");
+const cityEl = document.getElementById("city");
+const sortEl = document.getElementById("sort");
+const modal = document.getElementById("modal");
+const modalInner = document.getElementById("modalInner");
+const closeBtn = document.getElementById("closeBtn");
+
+let lastFocus = null;
+
+function coverHtml(m) {
+  const img = m.imagen
+    ? `<img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" loading="lazy" onerror="this.style.display='none'">`
+    : "";
+  return `<div class="cover"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span>${img}</div>`;
+}
+function igHtml(m) {
+  if (!m.instagram) return "";
+  return `<a class="ig" href="${esc(igUrl(m.instagram))}" target="_blank" rel="noopener noreferrer">${igSvg}${esc(igLabel(m.instagram))}</a>`;
+}
+
+function rebuildCityFilter() {
+  const cur = cityEl.value;
+  const ciudades = [...new Set(MARCAS.map((m) => m.ciudad).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+  cityEl.innerHTML =
+    '<option value="">Todas las ciudades</option>' +
+    ciudades.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  if (ciudades.includes(cur)) cityEl.value = cur;
+}
+
+function current() {
+  const q = norm(qEl.value.trim());
+  const city = cityEl.value;
+  let list = MARCAS.map((m, i) => ({ ...m, _i: i }));
+  if (city) list = list.filter((m) => m.ciudad === city);
+  if (q) list = list.filter((m) => norm(m.nombre).includes(q) || norm(m.producto).includes(q));
+  switch (sortEl.value) {
+    case "precio-asc": list.sort((a, b) => a.precio - b.precio); break;
+    case "precio-desc": list.sort((a, b) => b.precio - a.precio); break;
+    case "nombre": list.sort((a, b) => a.nombre.localeCompare(b.nombre, "es")); break;
+    default: list.sort((a, b) => a._i - b._i);
+  }
+  return list;
+}
+
+function render() {
+  const list = current();
+  grid.innerHTML = list
+    .map(
+      (m, idx) => `
+    <article class="card" style="--i:${idx}">
+      ${coverHtml(m)}
+      <div class="card-top">
+        <span class="logo" style="background:${esc(m.color)}">${esc(initials(m.nombre))}</span>
+        <span>
+          <button class="card-open" type="button" data-i="${m._i}" aria-haspopup="dialog">${esc(m.nombre)}</button>
+          <span class="brand-city">${pinSvg}${esc(m.ciudad)}</span>
+        </span>
+      </div>
+      <div class="card-body">
+        <span class="prod-label">Participa con</span>
+        <span class="prod-name">${esc(m.producto)}</span>
+        <div class="card-foot">
+          <span class="tag">${fmtPrecio(m.precio)}</span>
+          ${igHtml(m)}
+        </div>
+      </div>
+    </article>`
+    )
+    .join("");
+  empty.hidden = list.length !== 0;
+  empty.textContent = MARCAS.length === 0
+    ? "Aún no hay marcas publicadas."
+    : "No hay marcas que coincidan con la búsqueda.";
+  const total = MARCAS.length;
+  countEl.innerHTML = list.length === total ? `<b>${total}</b> marcas` : `<b>${list.length}</b> de ${total} marcas`;
+}
+
+function openModal(i) {
+  const m = MARCAS[i];
+  if (!m) return;
+  lastFocus = document.activeElement;
+  const cover = m.imagen
+    ? `<div class="modal-cover"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span><img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" onerror="this.style.display='none'"></div>`
+    : "";
+  modalInner.innerHTML = `
+    ${cover}
+    <div class="modal-pad">
+      <div class="modal-top">
+        <span class="logo" style="background:${esc(m.color)}">${esc(initials(m.nombre))}</span>
+        <span>
+          <div class="modal-name">${esc(m.nombre)}</div>
+          <div class="modal-city">${pinSvg}${esc(m.ciudad)}</div>
+        </span>
+      </div>
+      <div class="modal-row">
+        <span class="prod-label">Participa con</span>
+        <div class="modal-prod">${esc(m.producto)}</div>
+        ${m.nota ? `<p class="modal-note">${esc(m.nota)}</p>` : ""}
+      </div>
+      <div class="modal-foot">
+        <span><span class="prod-label">Precio en feria</span><span class="tag">${fmtPrecio(m.precio)}</span></span>
+        ${igHtml(m)}
+      </div>
+    </div>`;
+  if (typeof modal.showModal === "function") modal.showModal();
+  closeBtn.focus();
+}
+
+grid.addEventListener("click", (e) => {
+  const b = e.target.closest(".card-open");
+  if (b) openModal(Number(b.dataset.i));
+});
+closeBtn.addEventListener("click", () => modal.close());
+modal.addEventListener("click", (e) => {
+  if (e.target !== modal) return;
+  const r = modal.getBoundingClientRect();
+  if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) modal.close();
+});
+modal.addEventListener("close", () => {
+  if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+});
+qEl.addEventListener("input", render);
+cityEl.addEventListener("change", render);
+sortEl.addEventListener("change", render);
+
+/* ---------- Cargar marcas desde Supabase ---------- */
+async function loadMarcas() {
+  if (!MARCAS.length) grid.innerHTML = `<p class="grid-note">Cargando marcas…</p>`;
+  const { data, error } = await sb
+    .from("marcas")
+    .select("*")
+    .eq("publicada", true)
+    .order("orden", { ascending: true })
+    .order("id", { ascending: true });
+  if (error) {
+    console.error(error);
+    grid.innerHTML = `<p class="grid-note">No se pudieron cargar las marcas. Revisa tu conexión y recarga.</p>`;
+    countEl.textContent = "";
+    return;
+  }
+  MARCAS = (data || []).map((m) => ({
+    id: m.id,
+    nombre: m.nombre || "",
+    ciudad: m.ciudad || "",
+    producto: m.producto || "",
+    precio: Number(m.precio) || 0,
+    color: m.color || "#8E3B46",
+    nota: m.nota || "",
+    instagram: m.instagram || "",
+    imagen: m.imagen || ""
+  }));
+  rebuildCityFilter();
+  render();
+}
+
+/* ---------- Mensaje de bienvenida ---------- */
+const intro = document.getElementById("intro");
+const introClose = document.getElementById("introClose");
+const introSkip = document.getElementById("introSkip");
+function introHidden() {
+  try { return localStorage.getItem("psl-intro-hidden") === "1"; } catch (e) { return false; }
+}
+if (!introHidden() && typeof intro.showModal === "function") {
+  intro.showModal();
+  introClose.focus();
+}
+introClose.addEventListener("click", () => intro.close());
+introSkip.addEventListener("click", () => {
+  try { localStorage.setItem("psl-intro-hidden", "1"); } catch (e) {}
+  intro.close();
+});
+
+/* ---------- Formulario de inscripción -> Supabase ---------- */
+const btnInscribir = document.getElementById("btnInscribir");
+const inscDialog = document.getElementById("inscribir");
+const inscForm = document.getElementById("inscForm");
+const inscClose = document.getElementById("inscClose");
+const inscMsg = document.getElementById("inscMsg");
+let inscLastFocus = null;
+
+btnInscribir.addEventListener("click", () => {
+  inscLastFocus = document.activeElement;
+  inscMsg.textContent = "";
+  if (typeof inscDialog.showModal === "function") inscDialog.showModal();
+});
+inscClose.addEventListener("click", () => inscDialog.close());
+inscDialog.addEventListener("close", () => {
+  if (inscLastFocus && typeof inscLastFocus.focus === "function") inscLastFocus.focus();
+});
+inscForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = new FormData(inscForm);
+  const g = (k) => (f.get(k) || "").toString().trim();
+  const btn = inscForm.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  inscMsg.textContent = "Enviando…";
+  const { error } = await sb.from("inscripciones").insert({
+    marca: g("marca"),
+    ciudad: g("ciudad"),
+    producto: g("producto"),
+    precio: g("precio"),
+    instagram: g("instagram") || null,
+    contacto: g("contacto")
+  });
+  btn.disabled = false;
+  if (error) {
+    console.error(error);
+    inscMsg.textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+    return;
+  }
+  inscForm.reset();
+  inscMsg.textContent = "¡Listo! Recibimos tu inscripción. El equipo te va a contactar.";
+  setTimeout(() => { inscDialog.close(); inscMsg.textContent = ""; }, 2600);
+});
+
+/* ---------- Enlaces de seguimiento + compartir ---------- */
+document.querySelectorAll("[data-seguimiento]").forEach((a) => { a.href = ENLACE_SEGUIMIENTO; });
+
+const pageUrl = window.location.href.split("#")[0];
+const shareMsg = "Pereira se levanta — feria de marcas del Eje Cafetero. Conócelas y apoya:";
+const shWpp = document.getElementById("shWpp");
+if (shWpp) shWpp.href = "https://wa.me/?text=" + encodeURIComponent(shareMsg + " " + pageUrl);
+const shFb = document.getElementById("shFb");
+if (shFb) shFb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageUrl);
+const shCopy = document.getElementById("shCopy");
+if (shCopy) {
+  const copyLabel = shCopy.textContent;
+  const flash = (msg) => { shCopy.textContent = msg; setTimeout(() => { shCopy.textContent = copyLabel; }, 1800); };
+  shCopy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      flash("¡Enlace copiado!");
+    } catch (e) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = pageUrl; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+        flash("¡Enlace copiado!");
+      } catch (e2) {
+        flash("Copia el enlace de la barra");
+      }
+    }
+  });
+}
+
+/* ============================================================
+   PANEL DEL ORGANIZADOR (login con Supabase Auth)
+   ============================================================ */
+const admDlg = document.getElementById("admin");
+const admClose = document.getElementById("admClose");
+const admOpen = document.getElementById("admOpen");
+const admLogin = document.getElementById("admLogin");
+const admLoginErr = document.getElementById("admLoginErr");
+const admPanel = document.getElementById("admPanel");
+const admForm = document.getElementById("admForm");
+const admSave = document.getElementById("admSave");
+const admMsg = document.getElementById("admMsg");
+const admMarcasList = document.getElementById("admMarcasList");
+const admInscList = document.getElementById("admInscList");
+const admInscMsg = document.getElementById("admInscMsg");
+const admBadge = document.getElementById("admBadge");
+let admLastFocus = null;
+
+async function refreshAdminSession() {
+  const { data: { session } } = await sb.auth.getSession();
+  const authed = !!session;
+  admLogin.hidden = authed;
+  admPanel.hidden = !authed;
+  if (authed) { loadAdminMarcas(); loadInscripciones(); }
+}
+
+admOpen.addEventListener("click", () => {
+  admLastFocus = document.activeElement;
+  if (typeof admDlg.showModal === "function") admDlg.showModal();
+  refreshAdminSession();
+});
+admClose.addEventListener("click", () => admDlg.close());
+admDlg.addEventListener("close", () => {
+  if (admLastFocus && typeof admLastFocus.focus === "function") admLastFocus.focus();
+});
+
+admLogin.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  admLoginErr.hidden = true;
+  const f = new FormData(admLogin);
+  const { error } = await sb.auth.signInWithPassword({
+    email: String(f.get("email") || "").trim(),
+    password: String(f.get("password") || "")
+  });
+  if (error) {
+    admLoginErr.hidden = false;
+    admLoginErr.textContent = "Correo o contraseña incorrectos.";
+    return;
+  }
+  admLogin.reset();
+  refreshAdminSession();
+});
+document.getElementById("admLogout").addEventListener("click", async () => {
+  await sb.auth.signOut();
+  refreshAdminSession();
+});
+
+admPanel.querySelectorAll(".adm-tab").forEach((t) => {
+  t.addEventListener("click", () => {
+    admPanel.querySelectorAll(".adm-tab").forEach((x) => x.classList.toggle("is-active", x === t));
+    const v = t.dataset.tab;
+    admPanel.querySelectorAll(".adm-view").forEach((view) => { view.hidden = view.dataset.view !== v; });
+  });
+});
+
+/* ----- imagen -> storage ----- */
+function shrinkToBlob(file) {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onerror = () => reject(fr.error);
+    fr.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("img"));
+      img.onload = () => {
+        const max = 1000;
+        let w = img.naturalWidth || img.width;
+        let h = img.naturalHeight || img.height;
+        if (w > max || h > max) { const s = max / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
+        const c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        c.toBlob((b) => (b ? resolve(b) : reject(new Error("blob"))), "image/jpeg", 0.78);
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+async function uploadFoto(file) {
+  const blob = await shrinkToBlob(file);
+  const path = Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg";
+  const { error } = await sb.storage.from("fotos").upload(path, blob, { contentType: "image/jpeg" });
+  if (error) throw error;
+  return sb.storage.from("fotos").getPublicUrl(path).data.publicUrl;
+}
+
+/* ----- agregar marca ----- */
+admForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  admSave.disabled = true;
+  admMsg.textContent = "Guardando…";
+  const f = new FormData(admForm);
+  const val = (k) => (f.get(k) || "").toString().trim();
+  try {
+    let imagen = null;
+    const file = f.get("imagen");
+    if (file && file.size) { admMsg.textContent = "Subiendo foto…"; imagen = await uploadFoto(file); }
+    const { error } = await sb.from("marcas").insert({
+      nombre: val("nombre"),
+      ciudad: val("ciudad"),
+      producto: val("producto"),
+      precio: parseInt(val("precio").replace(/[^\d]/g, ""), 10) || 0,
+      color: val("color") || "#8E3B46",
+      nota: val("nota") || null,
+      instagram: val("instagram") || null,
+      imagen: imagen,
+      publicada: true
+    });
+    if (error) throw error;
+    admForm.reset();
+    admMsg.textContent = "Marca agregada y publicada.";
+    await Promise.all([loadMarcas(), loadAdminMarcas()]);
+  } catch (err) {
+    console.error(err);
+    admMsg.textContent = "No se pudo guardar: " + (err.message || "error");
+  } finally {
+    admSave.disabled = false;
+  }
+});
+
+/* ----- lista de marcas + quitar ----- */
+async function loadAdminMarcas() {
+  const { data, error } = await sb.from("marcas").select("id,nombre,ciudad").order("orden", { ascending: true }).order("id", { ascending: true });
+  if (error) { admMarcasList.innerHTML = ""; return; }
+  admMarcasList.innerHTML =
+    (data || []).map((m) =>
+      `<div class="adm-row"><span>${esc(m.nombre)} &middot; <span style="color:var(--muted)">${esc(m.ciudad)}</span></span>` +
+      `<button type="button" data-del-marca="${m.id}">Quitar</button></div>`
+    ).join("") || `<p class="adm-msg">Aún no hay marcas.</p>`;
+}
+let pendM = null;
+function clearPendM() {
+  if (!pendM) return;
+  clearTimeout(pendM.t);
+  if (pendM.b && pendM.b.isConnected) { pendM.b.textContent = "Quitar"; pendM.b.classList.remove("adm-confirm"); }
+  pendM = null;
+}
+admMarcasList.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-del-marca]");
+  if (!b) return;
+  const id = b.dataset.delMarca;
+  if (pendM && pendM.b === b) {
+    clearTimeout(pendM.t); pendM = null;
+    b.textContent = "Quitando…"; b.disabled = true;
+    const { error } = await sb.from("marcas").delete().eq("id", id);
+    if (error) { b.textContent = "Error"; b.disabled = false; return; }
+    await Promise.all([loadMarcas(), loadAdminMarcas()]);
+    return;
+  }
+  clearPendM();
+  b.textContent = "¿Confirmar?";
+  b.classList.add("adm-confirm");
+  pendM = { b, t: setTimeout(clearPendM, 4000) };
+});
+
+/* ----- inscripciones (solo admin) ----- */
+async function loadInscripciones() {
+  admInscMsg.textContent = "Cargando…";
+  const { data, error } = await sb.from("inscripciones").select("*").order("created_at", { ascending: false });
+  if (error) {
+    console.error(error);
+    admInscMsg.textContent = "No se pudieron cargar las inscripciones.";
+    admInscList.innerHTML = "";
+    return;
+  }
+  const rows = data || [];
+  const pend = rows.filter((r) => r.estado === "nueva").length;
+  admBadge.hidden = pend === 0;
+  admBadge.textContent = String(pend);
+  admInscMsg.textContent = rows.length ? "" : "Todavía no hay inscripciones.";
+  admInscList.innerHTML = rows.map((r) => {
+    const d = new Date(r.created_at);
+    const fecha = isNaN(d.getTime()) ? "" : d.toLocaleDateString("es-CO", { day: "2-digit", month: "short" });
+    return `<div class="adm-insc estado-${esc(r.estado)}">
+      <div class="adm-insc-h"><b>${esc(r.marca)}</b><time>${esc(fecha)}</time></div>
+      <div class="adm-insc-meta">${esc(r.ciudad)} &middot; ${esc(r.producto)} &middot; $${esc(r.precio || "—")}</div>
+      <div class="adm-insc-meta">${esc(r.contacto)}${r.instagram ? " &middot; " + esc(r.instagram) : ""}</div>
+      <div class="adm-insc-actions">
+        ${r.estado === "nueva" ? `<button type="button" data-insc-aprob="${r.id}">Aprobar y publicar</button>` : ""}
+        <button type="button" data-insc-arch="${r.id}">Archivar</button>
+        <button type="button" data-insc-del="${r.id}">Quitar</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+admInscList.addEventListener("click", async (e) => {
+  const ap = e.target.closest("[data-insc-aprob]");
+  const ar = e.target.closest("[data-insc-arch]");
+  const de = e.target.closest("[data-insc-del]");
+  if (ap) {
+    ap.disabled = true; ap.textContent = "Publicando…";
+    const { data: row } = await sb.from("inscripciones").select("*").eq("id", ap.dataset.inscAprob).single();
+    if (row) {
+      await sb.from("marcas").insert({
+        nombre: row.marca, ciudad: row.ciudad, producto: row.producto,
+        precio: parseInt(String(row.precio || "").replace(/[^\d]/g, ""), 10) || 0,
+        instagram: row.instagram || null, color: "#8E3B46", publicada: true
+      });
+      await sb.from("inscripciones").update({ estado: "aprobada" }).eq("id", row.id);
+      await Promise.all([loadMarcas(), loadAdminMarcas(), loadInscripciones()]);
+    } else {
+      ap.disabled = false; ap.textContent = "Aprobar y publicar";
+    }
+    return;
+  }
+  if (ar) {
+    await sb.from("inscripciones").update({ estado: "archivada" }).eq("id", ar.dataset.inscArch);
+    loadInscripciones();
+    return;
+  }
+  if (de) {
+    if (de.dataset.armed === "1") {
+      await sb.from("inscripciones").delete().eq("id", de.dataset.inscDel);
+      loadInscripciones();
+      return;
+    }
+    de.dataset.armed = "1";
+    de.textContent = "¿Confirmar?";
+    de.classList.add("adm-confirm");
+    setTimeout(() => {
+      if (de.isConnected) { de.dataset.armed = ""; de.textContent = "Quitar"; de.classList.remove("adm-confirm"); }
+    }, 4000);
+    return;
+  }
+});
+
+/* ---------- Arranque ---------- */
+loadMarcas();
+</script>
+</body>
+</html>

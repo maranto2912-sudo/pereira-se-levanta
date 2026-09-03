@@ -8,25 +8,27 @@
 <meta property="og:title" content="Pereira se levanta — Feria de Marcas y Pequeñas Empresas">
 <meta property="og:description" content="Conoce las marcas del Eje Cafetero que participan. Cada visita y cada compra apoya al comercio local y a las familias afectadas por el terremoto.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#14130E">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%2314130E'/%3E%3Cpath%20d='M16%205c-6%205-6%2017%200%2022'%20stroke='%23F26350'%20stroke-width='3.4'%20fill='none'%20stroke-linecap='round'/%3E%3Cellipse%20cx='16'%20cy='16'%20rx='7'%20ry='10'%20stroke='%23E0B24A'%20stroke-width='2'%20fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#12170E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%2312170E'/%3E%3Cpath%20d='M16%205c-6%205-6%2017%200%2022'%20stroke='%23DF4921'%20stroke-width='3.4'%20fill='none'%20stroke-linecap='round'/%3E%3Cellipse%20cx='16'%20cy='16'%20rx='7'%20ry='10'%20stroke='%23EAA315'%20stroke-width='2'%20fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 
 <style>
-  /* La página siempre se ve en modo oscuro. */
+  /* La página siempre se ve en modo oscuro. Paleta de marca. */
   :root {
     color-scheme: dark;
-    --paper:      #14130E;
-    --surface:    #1D1B15;
-    --surface-2:  #26231B;
-    --ink:        #EDEADF;
-    --muted:      #9C9786;
-    --line:       #37332A;
-    --accent:     #F26350;
-    --accent-ink: #1C1A15;
-    --accent-2:   #E0B24A;
+    --paper:      #12170E;   /* Negro */
+    --surface:    #1B2015;
+    --surface-2:  #262C1D;
+    --ink:        #F7EFE1;   /* Crema */
+    --muted:      #A7A489;
+    --line:       #363C2B;
+    --accent:     #DF4921;   /* Terracota */
+    --accent-ink: #12170E;   /* Negro (texto sobre terracota) */
+    --accent-2:   #EAA315;   /* Amarillo */
+    --accent-3:   #93AF43;   /* Verde */
+    --brand-cafe: #793520;   /* Café */
     --shadow-rgb: 0 0 0;
     --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
     --font-head: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
@@ -54,17 +56,18 @@
 
   /* Logo mark */
   .logo-mark { display: inline-block; line-height: 0; flex: none; }
-  .logo-mark svg, .logo-mark img { display: block; width: 100%; height: 100%; border-radius: 50%; }
-  .logo-mark.sm { width: 34px; height: 34px; }
-  .logo-mark.md { width: 46px; height: 46px; }
-  .logo-mark.lg { width: 88px; height: 88px; }
+  .logo-mark svg { display: block; width: 100%; height: 100%; border-radius: 50%; }
+  .logo-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .logo-mark.sm { width: 42px; height: 42px; }
+  .logo-mark.md { width: 52px; height: 52px; }
+  .logo-mark.lg { width: 96px; height: 96px; }
 
   /* Top bar */
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 20px; }
   .topbar-brand { display: flex; align-items: center; gap: 11px; }
-  .brandline { display: flex; flex-direction: column; line-height: 1.25; font-family: var(--font-mono); }
-  .brandline b { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); }
-  .brand-sub { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+  .brandline { display: flex; flex-direction: column; line-height: 1.15; font-family: var(--font-mono); }
+  .brandline b { font-size: 17px; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); }
+  .brand-sub { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2); }
   .ig-btn {
     flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px;
     border: 1px solid var(--line); border-radius: 9px; color: var(--muted); text-decoration: none;
@@ -232,9 +235,9 @@
   }
   .intro-credit {
     margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed var(--line); font-family: var(--font-mono);
-    font-size: 11px; letter-spacing: 0.06em; color: var(--muted);
+    font-size: 12px; letter-spacing: 0.06em; color: var(--accent-2);
   }
-  .intro-credit b { color: var(--ink); }
+  .intro-credit b { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: 0.01em; }
 
   .modal-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
   .modal-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -357,6 +360,7 @@
   }
   .foot-brand { display: flex; align-items: center; gap: 12px; }
   .foot-brand b { color: var(--ink); font-family: var(--font-head); letter-spacing: 0; font-size: 13px; }
+  .foot-by { color: var(--ink); font-weight: 700; font-size: 14px; }
   .foot-meta { display: flex; flex-direction: column; gap: 6px; max-width: 44ch; text-align: right; margin-left: auto; }
   .foot-link { background: none; border: 0; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; align-self: flex-end; }
   .foot-link:hover { color: var(--accent); }
@@ -373,7 +377,7 @@
     <span class="topbar-brand">
       <span class="logo-mark sm" data-logo></span>
       <span class="brandline">
-        <span class="brand-sub">Una idea de</span>
+        <span class="brand-sub">by</span>
         <b>Kevin Sachica</b>
       </span>
       <a class="ig-btn" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Abrir el Instagram de Kevin Sachica">
@@ -497,7 +501,7 @@
       <span class="logo-mark md" data-logo></span>
       <span>
         <b>Pereira se levanta</b><br>
-        Una idea de Kevin Sachica
+        <span class="brand-sub" style="color:var(--accent-2)">by</span> <span class="foot-by">Kevin Sachica</span>
       </span>
     </div>
     <div class="foot-meta">
@@ -526,7 +530,7 @@
     </div>
     <button class="intro-cta" id="introClose" type="button">Conócelas aquí →</button>
     <button class="intro-skip" id="introSkip" type="button">No volver a mostrar este mensaje</button>
-    <p class="intro-credit">Una idea de <b>Kevin Sachica</b></p>
+    <p class="intro-credit">by <b>Kevin Sachica</b></p>
   </div>
 </dialog>
 
@@ -592,7 +596,7 @@
           <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
           <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
           <div class="fld-row">
-            <label class="fld"><span>Color</span><input name="color" type="color" value="#8E3B46"></label>
+            <label class="fld"><span>Color</span><input name="color" type="color" value="#793520"></label>
             <label class="fld"><span>Foto (opcional)</span><input name="imagen" type="file" accept="image/*"></label>
           </div>
           <button class="btn-solid" style="justify-content:center" id="admSave" type="submit">Agregar marca</button>
@@ -625,8 +629,10 @@ const ENLACE_SEGUIMIENTO = "https://www.instagram.com/kevinsachica_";
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 document.documentElement.setAttribute("data-theme", "dark");
 
-/* ---------- Logo ---------- */
-const LOGO = `
+/* ---------- Logo ----------
+   La imagen real va en el archivo  logo.png  (súbelo al repo, junto a index.html).
+   Ideal: PNG con fondo transparente. Si logo.png no existe, se muestra el dibujo de abajo. */
+const LOGO_FALLBACK = `
   <svg viewBox="0 0 120 120" role="img" aria-label="Pereira se levanta" xmlns="http://www.w3.org/2000/svg">
     <circle cx="60" cy="60" r="59" fill="#F0E6D5"/>
     <g stroke="#3C6B3E" stroke-width="2.4" stroke-linecap="round" fill="none">
@@ -647,7 +653,11 @@ const LOGO = `
     <path d="M42 43 C 42 24, 78 24, 78 43 Z" fill="#E7C078"/>
     <path d="M42 41 C 50 46, 70 46, 78 41 L 78 44 C 70 49, 50 49, 42 44 Z" fill="#6E4A2C"/>
   </svg>`;
-document.querySelectorAll("[data-logo]").forEach((el) => { el.innerHTML = LOGO; });
+document.querySelectorAll("[data-logo]").forEach((el) => {
+  el.innerHTML = '<img src="logo.png" alt="Pereira se levanta">';
+  const img = el.querySelector("img");
+  img.addEventListener("error", () => { el.innerHTML = LOGO_FALLBACK; }, { once: true });
+});
 
 /* ---------- Helpers ---------- */
 const fmtPrecio = (n) =>
@@ -833,7 +843,7 @@ async function loadMarcas() {
     ciudad: m.ciudad || "",
     producto: m.producto || "",
     precio: Number(m.precio) || 0,
-    color: m.color || "#8E3B46",
+    color: m.color || "#793520",
     nota: m.nota || "",
     instagram: m.instagram || "",
     imagen: m.imagen || ""
@@ -1044,7 +1054,7 @@ admForm.addEventListener("submit", async (e) => {
       ciudad: val("ciudad"),
       producto: val("producto"),
       precio: parseInt(val("precio").replace(/[^\d]/g, ""), 10) || 0,
-      color: val("color") || "#8E3B46",
+      color: val("color") || "#793520",
       nota: val("nota") || null,
       instagram: val("instagram") || null,
       imagen: imagen,
@@ -1138,7 +1148,7 @@ admInscList.addEventListener("click", async (e) => {
       await sb.from("marcas").insert({
         nombre: row.marca, ciudad: row.ciudad, producto: row.producto,
         precio: parseInt(String(row.precio || "").replace(/[^\d]/g, ""), 10) || 0,
-        instagram: row.instagram || null, color: "#8E3B46", publicada: true
+        instagram: row.instagram || null, color: "#793520", publicada: true
       });
       await sb.from("inscripciones").update({ estado: "aprobada" }).eq("id", row.id);
       await Promise.all([loadMarcas(), loadAdminMarcas(), loadInscripciones()]);

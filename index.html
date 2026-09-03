@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%2312170E'/%3E%3Cpath%20d='M16%205c-6%205-6%2017%200%2022'%20stroke='%23DF4921'%20stroke-width='3.4'%20fill='none'%20stroke-linecap='round'/%3E%3Cellipse%20cx='16'%20cy='16'%20rx='7'%20ry='10'%20stroke='%23EAA315'%20stroke-width='2'%20fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap">
 
 <style>
   /* La página siempre se ve en modo oscuro. Paleta de marca. */
@@ -30,25 +30,29 @@
     --accent-3:   #93AF43;   /* Verde */
     --brand-cafe: #793520;   /* Café */
     --shadow-rgb: 0 0 0;
-    --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
+    --font-display: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
     --font-head: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
-    --font-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-body: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
+    --font-mono: "Archivo", system-ui, -apple-system, Segoe UI, sans-serif;
     --maxw: 1140px;
     --radius: 7px;
   }
 
   * { box-sizing: border-box; }
 
+  /* Toda la página en Archivo Medium Italic. */
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 500;
     font-size: 16px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
+  input, select, textarea, button { font-style: italic; }
 
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
   a { color: inherit; }
@@ -68,12 +72,15 @@
   .brandline { display: flex; flex-direction: column; line-height: 1.15; font-family: var(--font-mono); }
   .brandline b { font-size: 17px; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); }
   .brand-sub { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2); }
+  .socials { display: inline-flex; align-items: center; gap: 8px; }
   .ig-btn {
-    flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px;
-    border: 1px solid var(--line); border-radius: 9px; color: var(--muted); text-decoration: none;
-    transition: color .14s ease, border-color .14s ease;
+    flex: none; display: inline-grid; place-items: center; width: 42px; height: 42px;
+    border: 1px solid var(--line); border-radius: 12px; color: var(--muted); text-decoration: none;
+    transition: color .14s ease, border-color .14s ease, background .14s ease;
   }
-  .ig-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .ig-btn svg { width: 20px; height: 20px; }
+  .ig-btn:hover { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 460px) { .socials { gap: 6px; } .ig-btn { width: 38px; height: 38px; } .ig-btn svg { width: 18px; height: 18px; } }
 
   /* Masthead */
   .masthead {
@@ -86,18 +93,21 @@
     text-transform: uppercase; color: var(--accent);
   }
   .wordmark {
-    margin: 0; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
-    line-height: 0.9; letter-spacing: -0.03em; display: flex; flex-direction: column;
+    margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+    line-height: 0.92; letter-spacing: -0.02em; display: flex; flex-direction: column;
   }
-  .wordmark .l1 { font-size: clamp(2.7rem, 11vw, 6.3rem); }
-  .wordmark .l2 { font-size: clamp(1.5rem, 6vw, 3.3rem); color: var(--accent); letter-spacing: -0.02em; }
+  .wordmark .l1 { font-size: clamp(2.6rem, 10.5vw, 6rem); }
+  .wordmark .l2 { font-size: clamp(1.5rem, 6vw, 3.3rem); color: var(--accent); }
   .slogan {
     margin: 16px 0 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--accent-2);
+    text-transform: uppercase; color: var(--accent-3);
   }
   .run { margin: 14px 0 0; font-family: var(--font-mono); font-size: clamp(13px, 1.7vw, 15px); letter-spacing: 0.04em; color: var(--ink); }
   .run .dot { color: var(--accent-2); padding: 0 8px; }
-  .lede { margin: 18px 0 0; max-width: 56ch; font-size: clamp(15px, 2vw, 17px); color: var(--muted); }
+  .lede {
+    margin: 18px 0 0; max-width: 56ch; font-size: clamp(15px, 2vw, 17px); color: var(--muted);
+    text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto;
+  }
   .lede p { margin: 0; }
   .lede p + p { margin-top: 10px; }
 
@@ -213,31 +223,34 @@
 
   #intro { max-width: 520px; text-align: center; }
   .intro-inner { padding: 32px clamp(22px, 5vw, 34px) 24px; }
-  #intro .logo-mark.lg { margin: 0 auto 14px; }
+  #intro .logo-mark.lg { margin: 0 auto 10px; }
+  .intro-credit {
+    margin: 0 0 18px; font-family: var(--font-head); font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent-2);
+  }
+  .intro-credit b {
+    display: block; margin-top: 3px; color: var(--ink); font-size: 22px; font-weight: 700;
+    letter-spacing: 0.005em; text-transform: none;
+  }
   .intro-slogan {
     margin: 0 0 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--accent-2);
   }
   #introTitle {
-    margin: 0 0 18px; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+    margin: 0 0 18px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
     font-size: clamp(1.7rem, 6vw, 2.4rem); letter-spacing: -0.02em; line-height: 1;
   }
-  .intro-body { text-align: left; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+  .intro-body { text-align: justify; hyphens: auto; -webkit-hyphens: auto; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
   .intro-body b { color: var(--accent); }
   .intro-cta {
     margin-top: 22px; width: 100%; padding: 13px 18px; border: 0; border-radius: 8px; background: var(--accent);
-    color: var(--accent-ink); font-family: var(--font-head); font-weight: 600; font-size: 15px; cursor: pointer; transition: filter .14s ease;
+    color: var(--accent-ink); font-family: var(--font-head); font-weight: 700; font-size: 15px; cursor: pointer; transition: filter .14s ease;
   }
   .intro-cta:hover { filter: brightness(1.06); }
   .intro-skip {
     margin-top: 10px; background: none; border: 0; color: var(--muted); font-family: var(--font-mono);
     font-size: 11px; letter-spacing: 0.03em; cursor: pointer; text-decoration: underline;
   }
-  .intro-credit {
-    margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed var(--line); font-family: var(--font-mono);
-    font-size: 12px; letter-spacing: 0.06em; color: var(--accent-2);
-  }
-  .intro-credit b { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: 0.01em; }
 
   .modal-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
   .modal-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -255,7 +268,7 @@
   .modal-row { margin-top: 20px; }
   .modal-row .prod-label { display: block; margin-bottom: 6px; }
   .modal-prod { font-size: 17px; font-weight: 500; line-height: 1.4; }
-  .modal-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+  .modal-note { margin: 14px 0 0; color: var(--muted); font-size: 14px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .modal-foot {
     margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line);
     display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
@@ -270,7 +283,7 @@
   /* Forms (inscripción + panel) */
   #inscribir { max-width: 460px; }
   .insc-title { margin: 0 0 6px; padding-right: 30px; font-family: var(--font-head); font-weight: 700; font-size: 20px; }
-  .insc-hint { margin: 0 0 18px; font-size: 13px; color: var(--muted); }
+  .insc-hint { margin: 0 0 18px; font-size: 13px; color: var(--muted); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .insc-form { display: flex; flex-direction: column; gap: 13px; }
   .fld { display: flex; flex-direction: column; gap: 5px; }
   .fld span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
@@ -319,26 +332,62 @@
   /* Buttons */
   .btn-solid {
     display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border: 0; border-radius: 8px;
-    background: var(--accent); color: var(--accent-ink); font-family: var(--font-head); font-weight: 600;
-    font-size: 13.5px; text-decoration: none; white-space: nowrap; transition: filter .14s ease;
+    background: var(--accent); color: var(--accent-ink); font-family: var(--font-head); font-weight: 700;
+    font-size: 15px; text-decoration: none; white-space: nowrap; transition: filter .14s ease;
   }
   .btn-solid:hover { filter: brightness(1.06); }
   .btn-solid[disabled] { opacity: .6; cursor: default; }
   .btn-solid, .btn-ghost { cursor: pointer; }
   .btn-ghost {
-    display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 8px;
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 8px;
     background: var(--surface); color: var(--ink); border: 1px solid var(--line); font-family: var(--font-mono);
-    font-size: 12.5px; text-decoration: none; white-space: nowrap; transition: border-color .14s ease, color .14s ease;
+    font-size: 14px; text-decoration: none; white-space: nowrap; transition: border-color .14s ease, color .14s ease;
   }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
   .join {
-    margin: 24px 0 4px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius);
-    background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+    margin: 24px 0 4px; padding: 18px 20px; border: 1px solid var(--line);
+    border-left: 4px solid var(--brand-cafe); border-radius: var(--radius);
+    background: color-mix(in srgb, var(--brand-cafe) 22%, var(--surface));
     display: flex; align-items: center; justify-content: space-between; gap: 14px 22px; flex-wrap: wrap;
   }
-  .join p { margin: 0; font-size: 14px; max-width: 62ch; }
-  .join b { font-family: var(--font-head); }
+  .join p { margin: 0; font-size: 16px; line-height: 1.5; max-width: 62ch; color: var(--ink); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .join b {
+    display: block; margin-bottom: 5px; font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(19px, 3.4vw, 22px); line-height: 1.2; color: var(--ink);
+  }
+
+  /* Recaudo */
+  .recaudo {
+    margin: 26px 0 0; padding: 20px 22px; border: 1px solid var(--line);
+    border-left: 4px solid var(--accent-3); border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent-3) 14%, var(--surface));
+  }
+  .recaudo[hidden] { display: none; }
+  .recaudo-total {
+    margin-top: 4px; font-family: var(--font-display); font-weight: 700; font-style: italic;
+    font-size: clamp(1.9rem, 6.5vw, 3rem); letter-spacing: -0.02em; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .recaudo-bar {
+    display: flex; margin-top: 12px; height: 14px; border-radius: 100px; overflow: hidden;
+    background: var(--surface-2); border: 1px solid var(--line);
+  }
+  .recaudo-seg { height: 100%; min-width: 3px; transform-origin: left; animation: segIn .5s ease both; }
+  @keyframes segIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .recaudo-meta {
+    margin: 9px 0 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.03em; color: var(--muted);
+  }
+  .recaudo-toggle-wrap { margin-top: 6px; }
+  #recaudoToggle { margin-top: 8px; }
+  .recaudo-list {
+    margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 12px;
+    display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow: auto;
+  }
+  .recaudo-list[hidden] { display: none; }
+  .recaudo-item { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; }
+  .recaudo-item .o { color: var(--muted); }
+  .recaudo-item .m { font-family: var(--font-mono); color: var(--accent-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   .actions {
     margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line);
@@ -348,10 +397,11 @@
   .share { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
   @media (max-width: 640px) { .actions { grid-template-columns: 1fr; gap: 26px; } }
   .trans-eyebrow {
-    margin: 0 0 5px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--accent-2);
+    margin: 0 0 6px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent-3);
   }
-  .trans-text { margin: 0; max-width: 54ch; font-size: 14px; color: var(--muted); }
+  .recaudo .trans-eyebrow { color: var(--accent-2); }
+  .trans-text { margin: 0; max-width: 54ch; font-size: 16.5px; line-height: 1.5; color: var(--ink); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
   footer {
     margin-top: 40px; border-top: 1px solid var(--line); padding: 28px 0 48px; display: flex; flex-wrap: wrap;
@@ -380,13 +430,28 @@
         <span class="brand-sub">by</span>
         <b>Kevin Sachica</b>
       </span>
-      <a class="ig-btn" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Abrir el Instagram de Kevin Sachica">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
-        </svg>
-      </a>
+      <span class="socials">
+        <a class="ig-btn" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Kevin Sachica">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
+          </svg>
+        </a>
+        <a class="ig-btn" href="https://www.facebook.com/share/19W6Kyx1VK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Kevin Sachica">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M14.2 21v-6.2h2.05l.35-2.6H14.2v-1.6c0-.72.22-1.2 1.26-1.2H16.7V7.06c-.28-.04-1.06-.11-1.96-.11-1.94 0-3.27 1.18-3.27 3.36v1.89H9.4v2.6h2.07V21" fill="currentColor"/>
+          </svg>
+        </a>
+        <a class="ig-btn" href="https://www.tiktok.com/@kevin.sachica17" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Kevin Sachica">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M13 6.5v8.25a2.25 2.25 0 1 1-2.25-2.25c.26 0 .5.04.75.12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13 6.5c.35 1.7 1.7 3 3.5 3.15" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </span>
     </span>
   </div>
 
@@ -424,6 +489,15 @@
       <figcaption>Bandera de Pereira</figcaption>
     </figure>
   </header>
+
+  <section class="recaudo" id="recaudo" hidden>
+    <p class="trans-eyebrow">Recaudado para las familias</p>
+    <div class="recaudo-total" id="recaudoMonto">$0</div>
+    <div class="recaudo-bar" id="recaudoBar"></div>
+    <p class="recaudo-meta" id="recaudoMeta"></p>
+    <button class="foot-link" id="recaudoToggle" type="button" hidden>Ver detalle</button>
+    <div class="recaudo-list" id="recaudoList" hidden></div>
+  </section>
 </div>
 
 <div class="toolbar">
@@ -516,6 +590,7 @@
 <dialog id="intro" aria-labelledby="introTitle">
   <div class="intro-inner">
     <span class="logo-mark lg" data-logo></span>
+    <p class="intro-credit">by <b>Kevin Sachica</b></p>
     <p class="intro-slogan">Pereira · la querendona, trasnochadora y morena</p>
     <h2 id="introTitle">Pereira se levanta</h2>
     <div class="intro-body">
@@ -530,7 +605,6 @@
     </div>
     <button class="intro-cta" id="introClose" type="button">Conócelas aquí →</button>
     <button class="intro-skip" id="introSkip" type="button">No volver a mostrar este mensaje</button>
-    <p class="intro-credit">by <b>Kevin Sachica</b></p>
   </div>
 </dialog>
 
@@ -584,6 +658,7 @@
       <div class="adm-tabs">
         <button type="button" class="adm-tab is-active" data-tab="marcas">Marcas</button>
         <button type="button" class="adm-tab" data-tab="inscripciones">Inscripciones <span class="adm-badge" id="admBadge" hidden>0</span></button>
+        <button type="button" class="adm-tab" data-tab="recaudo">Recaudo</button>
         <button type="button" class="adm-logout" id="admLogout">Salir</button>
       </div>
 
@@ -608,6 +683,20 @@
       <div class="adm-view" data-view="inscripciones" hidden>
         <p class="adm-msg" id="admInscMsg">Cargando…</p>
         <div class="adm-list adm-list-tall" id="admInscList"></div>
+      </div>
+
+      <div class="adm-view" data-view="recaudo" hidden>
+        <form class="insc-form" id="recForm">
+          <label class="fld"><span>Monto (solo número) *</span><input name="monto" type="text" inputmode="numeric" required placeholder="120000"></label>
+          <label class="fld"><span>De qué marca / origen *</span><input name="origen" type="text" required placeholder="Café Altura"></label>
+          <div class="fld-row">
+            <label class="fld"><span>Fecha</span><input name="fecha" type="date"></label>
+            <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
+          </div>
+          <button class="btn-solid" style="justify-content:center" type="submit">Registrar aporte</button>
+        </form>
+        <p class="adm-msg" id="recMsg"></p>
+        <div class="adm-list adm-list-tall" id="recList"></div>
       </div>
     </div>
   </div>
@@ -662,6 +751,11 @@ document.querySelectorAll("[data-logo]").forEach((el) => {
 /* ---------- Helpers ---------- */
 const fmtPrecio = (n) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: MONEDA, maximumFractionDigits: 0 }).format(Number(n) || 0);
+const fmtFecha = (x) => {
+  const d = new Date(x);
+  return isNaN(d.getTime()) ? "" : d.toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" });
+};
+const segColor = (i) => ["var(--accent)", "var(--accent-2)", "var(--accent-3)", "var(--brand-cafe)"][i % 4];
 const norm = (s) => (s || "").normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 const initials = (name) =>
   (name || "?").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
@@ -852,6 +946,55 @@ async function loadMarcas() {
   render();
 }
 
+/* ---------- Recaudo (público) ---------- */
+const recSec = document.getElementById("recaudo");
+const recMontoEl = document.getElementById("recaudoMonto");
+const recBarEl = document.getElementById("recaudoBar");
+const recMetaEl = document.getElementById("recaudoMeta");
+const recToggleEl = document.getElementById("recaudoToggle");
+const recListPub = document.getElementById("recaudoList");
+
+recToggleEl.addEventListener("click", () => {
+  const h = recListPub.hidden;
+  recListPub.hidden = !h;
+  recToggleEl.textContent = h ? "Ocultar detalle" : "Ver detalle";
+});
+
+async function loadRecaudo() {
+  const { data, error } = await sb
+    .from("aportes")
+    .select("*")
+    .order("fecha", { ascending: false })
+    .order("id", { ascending: false });
+  if (error) { console.error(error); recSec.hidden = true; return; }
+  const rows = data || [];
+  if (!rows.length) { recSec.hidden = true; return; }
+
+  const total = rows.reduce((s, r) => s + (Number(r.monto) || 0), 0);
+  recSec.hidden = false;
+  recMontoEl.textContent = fmtPrecio(total);
+
+  recBarEl.innerHTML = rows
+    .slice()
+    .reverse()
+    .map((r, i) => {
+      const w = total > 0 ? (Number(r.monto) || 0) / total * 100 : 0;
+      return `<span class="recaudo-seg" style="width:${w}%;background:${segColor(i)};animation-delay:${i * 60}ms" title="${esc(r.origen || "")}: ${fmtPrecio(r.monto)}"></span>`;
+    })
+    .join("");
+
+  const n = rows.length;
+  recMetaEl.textContent =
+    `${n} aporte${n === 1 ? "" : "s"} · actualizado ${fmtFecha(rows[0].fecha || rows[0].created_at)}`;
+
+  recToggleEl.hidden = false;
+  recListPub.innerHTML = rows
+    .map((r) =>
+      `<div class="recaudo-item"><span class="o">${fmtFecha(r.fecha || r.created_at)} · ${esc(r.origen || "—")}${r.nota ? " · " + esc(r.nota) : ""}</span><span class="m">${fmtPrecio(r.monto)}</span></div>`
+    )
+    .join("");
+}
+
 /* ---------- Mensaje de bienvenida ---------- */
 const intro = document.getElementById("intro");
 const introClose = document.getElementById("introClose");
@@ -958,6 +1101,9 @@ const admMarcasList = document.getElementById("admMarcasList");
 const admInscList = document.getElementById("admInscList");
 const admInscMsg = document.getElementById("admInscMsg");
 const admBadge = document.getElementById("admBadge");
+const recForm = document.getElementById("recForm");
+const recMsg = document.getElementById("recMsg");
+const recList = document.getElementById("recList");
 let admLastFocus = null;
 
 async function refreshAdminSession() {
@@ -965,7 +1111,7 @@ async function refreshAdminSession() {
   const authed = !!session;
   admLogin.hidden = authed;
   admPanel.hidden = !authed;
-  if (authed) { loadAdminMarcas(); loadInscripciones(); }
+  if (authed) { loadAdminMarcas(); loadInscripciones(); loadRecaudoAdmin(); }
 }
 
 admOpen.addEventListener("click", () => {
@@ -1178,8 +1324,68 @@ admInscList.addEventListener("click", async (e) => {
   }
 });
 
+/* ---------- Recaudo (panel admin) ---------- */
+async function loadRecaudoAdmin() {
+  recMsg.textContent = "";
+  const { data, error } = await sb
+    .from("aportes")
+    .select("*")
+    .order("fecha", { ascending: false })
+    .order("id", { ascending: false });
+  if (error) { recList.innerHTML = ""; recMsg.textContent = "No se pudo cargar."; return; }
+  const rows = data || [];
+  const total = rows.reduce((s, r) => s + (Number(r.monto) || 0), 0);
+  recList.innerHTML =
+    `<div class="adm-row"><span><b>Total recaudado: ${fmtPrecio(total)}</b></span></div>` +
+    (rows.length
+      ? rows.map((r) =>
+          `<div class="adm-row"><span>${fmtFecha(r.fecha || r.created_at)} &middot; ${esc(r.origen || "—")} &middot; <span style="color:var(--accent-2)">${fmtPrecio(r.monto)}</span></span>` +
+          `<button type="button" data-rec-del="${r.id}">Quitar</button></div>`
+        ).join("")
+      : `<p class="adm-msg">Aún no hay aportes registrados.</p>`);
+}
+
+recForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = recForm.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  recMsg.textContent = "Guardando…";
+  const f = new FormData(recForm);
+  const monto = parseInt(String(f.get("monto") || "").replace(/[^\d]/g, ""), 10) || 0;
+  const origen = String(f.get("origen") || "").trim();
+  const fecha = String(f.get("fecha") || "").trim();
+  const nota = String(f.get("nota") || "").trim();
+  const payload = { monto, origen, nota: nota || null };
+  if (fecha) payload.fecha = fecha;
+  const { error } = await sb.from("aportes").insert(payload);
+  btn.disabled = false;
+  if (error) { console.error(error); recMsg.textContent = "No se pudo guardar: " + (error.message || "error"); return; }
+  recForm.reset();
+  recMsg.textContent = "Aporte registrado.";
+  await Promise.all([loadRecaudoAdmin(), loadRecaudo()]);
+});
+
+recList.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-rec-del]");
+  if (!b) return;
+  if (b.dataset.armed === "1") {
+    b.textContent = "Quitando…"; b.disabled = true;
+    const { error } = await sb.from("aportes").delete().eq("id", b.dataset.recDel);
+    if (error) { b.textContent = "Error"; b.disabled = false; return; }
+    await Promise.all([loadRecaudoAdmin(), loadRecaudo()]);
+    return;
+  }
+  b.dataset.armed = "1";
+  b.textContent = "¿Confirmar?";
+  b.classList.add("adm-confirm");
+  setTimeout(() => {
+    if (b.isConnected) { b.dataset.armed = ""; b.textContent = "Quitar"; b.classList.remove("adm-confirm"); }
+  }, 4000);
+});
+
 /* ---------- Arranque ---------- */
 loadMarcas();
+loadRecaudo();
 </script>
 </body>
 </html>

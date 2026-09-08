@@ -492,6 +492,19 @@
     #introTitle { font-size: clamp(1.5rem, 8vw, 2rem); }
   }
 
+  /* Burbuja flotante (Bulmap) */
+  .fab-bubble {
+    position: fixed; right: 18px; bottom: 18px; z-index: 60;
+    width: 58px; height: 58px; border-radius: 50%; overflow: hidden; display: block;
+    border: 1px solid var(--line); background: var(--surface);
+    box-shadow: 0 10px 28px -8px rgb(var(--shadow-rgb) / 0.55);
+    transition: transform .16s ease, box-shadow .16s ease;
+  }
+  .fab-bubble[hidden] { display: none; }
+  .fab-bubble img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .fab-bubble:hover { transform: scale(1.06); box-shadow: 0 14px 34px -8px rgb(var(--shadow-rgb) / 0.7); }
+  @media (max-width: 560px) { .fab-bubble { width: 52px; height: 52px; right: 14px; bottom: 14px; } }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
@@ -818,6 +831,11 @@
   </div>
 </dialog>
 
+<!-- Burbuja flotante Bulmap -->
+<a class="fab-bubble" id="bulmapFab" href="https://linktr.ee/Bulmap" target="_blank" rel="noopener noreferrer" aria-label="Bulmap" hidden>
+  <img src="bulmap.png" alt="Bulmap">
+</a>
+
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
@@ -870,6 +888,14 @@ if (kevinFig) {
   const ki = kevinFig.querySelector("img");
   ki.addEventListener("load", () => { kevinFig.hidden = false; }, { once: true });
   ki.addEventListener("error", () => { kevinFig.hidden = true; }, { once: true });
+}
+
+/* Burbuja flotante Bulmap: aparece solo si existe el archivo  bulmap.png */
+const bulmapFab = document.getElementById("bulmapFab");
+if (bulmapFab) {
+  const bi = bulmapFab.querySelector("img");
+  bi.addEventListener("load", () => { bulmapFab.hidden = false; }, { once: true });
+  bi.addEventListener("error", () => { bulmapFab.hidden = true; }, { once: true });
 }
 
 /* ---------- Helpers ---------- */

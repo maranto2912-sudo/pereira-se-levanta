@@ -579,13 +579,11 @@
     </div>
   </header>
 
-  <section class="recaudo" id="recaudo" hidden>
+  <section class="recaudo" id="recaudo">
     <p class="trans-eyebrow">Recaudado para las familias</p>
     <div class="recaudo-total" id="recaudoMonto">$0</div>
     <div class="recaudo-bar" id="recaudoBar"></div>
     <p class="recaudo-meta" id="recaudoMeta"></p>
-    <button class="foot-link" id="recaudoToggle" type="button" hidden>Ver detalle</button>
-    <div class="recaudo-list" id="recaudoList" hidden></div>
   </section>
 </div>
 
@@ -816,16 +814,11 @@
 
       <div class="adm-view" data-view="recaudo" hidden>
         <form class="insc-form" id="recForm">
-          <label class="fld"><span>Monto (solo número) *</span><input name="monto" type="text" inputmode="numeric" required placeholder="120000"></label>
-          <label class="fld"><span>De qué marca / origen *</span><input name="origen" type="text" required placeholder="Café Altura"></label>
-          <div class="fld-row">
-            <label class="fld"><span>Fecha</span><input name="fecha" type="date"></label>
-            <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
-          </div>
-          <button class="btn-solid" style="justify-content:center" type="submit">Registrar aporte</button>
+          <label class="fld"><span>Total recaudado (solo número, en pesos)</span>
+            <input name="total" type="text" inputmode="numeric" placeholder="0"></label>
+          <button class="btn-solid" style="justify-content:center" type="submit">Guardar total</button>
         </form>
         <p class="adm-msg" id="recMsg"></p>
-        <div class="adm-list adm-list-tall" id="recList"></div>
       </div>
     </div>
   </div>
@@ -883,20 +876,24 @@ document.querySelectorAll("[data-logo]").forEach((el) => {
 });
 
 /* Foto de Kevin: aparece solo si existe el archivo  kevin.jpg  (súbelo al repo). */
-const kevinFig = document.getElementById("kevinFig");
-if (kevinFig) {
-  const ki = kevinFig.querySelector("img");
-  ki.addEventListener("load", () => { kevinFig.hidden = false; }, { once: true });
-  ki.addEventListener("error", () => { kevinFig.hidden = true; }, { once: true });
+/* Muestra un elemento solo si su <img> carga bien (maneja también el caso
+   en que la imagen ya cargó antes de llegar aquí). */
+function revealIfImageLoads(container) {
+  if (!container) return;
+  const img = container.querySelector("img");
+  if (!img) return;
+  const show = () => { container.hidden = false; };
+  const hide = () => { container.hidden = true; };
+  if (img.complete) {
+    (img.naturalWidth > 0 ? show : hide)();
+  } else {
+    img.addEventListener("load", show, { once: true });
+    img.addEventListener("error", hide, { once: true });
+  }
 }
 
-/* Burbuja flotante Bulmap: aparece solo si existe el archivo  bulmap.png */
-const bulmapFab = document.getElementById("bulmapFab");
-if (bulmapFab) {
-  const bi = bulmapFab.querySelector("img");
-  bi.addEventListener("load", () => { bulmapFab.hidden = false; }, { once: true });
-  bi.addEventListener("error", () => { bulmapFab.hidden = true; }, { once: true });
-}
+revealIfImageLoads(document.getElementById("kevinFig"));
+revealIfImageLoads(document.getElementById("bulmapFab"));
 
 /* ---------- Helpers ---------- */
 const fmtPrecio = (n) =>
@@ -1122,53 +1119,26 @@ async function loadMarcas() {
   render();
 }
 
-/* ---------- Recaudo (público) ---------- */
+/* ---------- Recaudo (público) — total manual desde config ---------- */
 const recSec = document.getElementById("recaudo");
 const recMontoEl = document.getElementById("recaudoMonto");
 const recBarEl = document.getElementById("recaudoBar");
 const recMetaEl = document.getElementById("recaudoMeta");
-const recToggleEl = document.getElementById("recaudoToggle");
-const recListPub = document.getElementById("recaudoList");
-
-recToggleEl.addEventListener("click", () => {
-  const h = recListPub.hidden;
-  recListPub.hidden = !h;
-  recToggleEl.textContent = h ? "Ocultar detalle" : "Ver detalle";
-});
 
 async function loadRecaudo() {
-  const { data, error } = await sb
-    .from("aportes")
-    .select("*")
-    .order("fecha", { ascending: false })
-    .order("id", { ascending: false });
-  if (error) { console.error(error); recSec.hidden = true; return; }
-  const rows = data || [];
-  if (!rows.length) { recSec.hidden = true; return; }
-
-  const total = rows.reduce((s, r) => s + (Number(r.monto) || 0), 0);
-  recSec.hidden = false;
+  let total = 0;
+  let updated = null;
+  const { data, error } = await sb.from("config").select("recaudo_total,updated_at").eq("id", 1).maybeSingle();
+  if (!error && data) {
+    total = Number(data.recaudo_total) || 0;
+    updated = data.updated_at || null;
+  }
+  recSec.hidden = false; // la barra siempre se ve, aunque sea $0
   recMontoEl.textContent = fmtPrecio(total);
-
-  recBarEl.innerHTML = rows
-    .slice()
-    .reverse()
-    .map((r, i) => {
-      const w = total > 0 ? (Number(r.monto) || 0) / total * 100 : 0;
-      return `<span class="recaudo-seg" style="width:${w}%;background:${segColor(i)};animation-delay:${i * 60}ms" title="${esc(r.origen || "")}: ${fmtPrecio(r.monto)}"></span>`;
-    })
-    .join("");
-
-  const n = rows.length;
-  recMetaEl.textContent =
-    `${n} aporte${n === 1 ? "" : "s"} · actualizado ${fmtFecha(rows[0].fecha || rows[0].created_at)}`;
-
-  recToggleEl.hidden = false;
-  recListPub.innerHTML = rows
-    .map((r) =>
-      `<div class="recaudo-item"><span class="o">${fmtFecha(r.fecha || r.created_at)} · ${esc(r.origen || "—")}${r.nota ? " · " + esc(r.nota) : ""}</span><span class="m">${fmtPrecio(r.monto)}</span></div>`
-    )
-    .join("");
+  recBarEl.innerHTML = total > 0
+    ? `<span class="recaudo-seg" style="width:100%;background:var(--accent)"></span>`
+    : "";
+  recMetaEl.textContent = updated ? "Última actualización: " + fmtFecha(updated) : "";
 }
 
 /* ---------- Mensaje de bienvenida ---------- */
@@ -1305,7 +1275,6 @@ const admInscMsg = document.getElementById("admInscMsg");
 const admBadge = document.getElementById("admBadge");
 const recForm = document.getElementById("recForm");
 const recMsg = document.getElementById("recMsg");
-const recList = document.getElementById("recList");
 let admLastFocus = null;
 
 async function refreshAdminSession() {
@@ -1528,25 +1497,16 @@ admInscList.addEventListener("click", async (e) => {
   }
 });
 
-/* ---------- Recaudo (panel admin) ---------- */
+/* ---------- Recaudo (panel admin) — editar el total ---------- */
 async function loadRecaudoAdmin() {
   recMsg.textContent = "";
-  const { data, error } = await sb
-    .from("aportes")
-    .select("*")
-    .order("fecha", { ascending: false })
-    .order("id", { ascending: false });
-  if (error) { recList.innerHTML = ""; recMsg.textContent = "No se pudo cargar."; return; }
-  const rows = data || [];
-  const total = rows.reduce((s, r) => s + (Number(r.monto) || 0), 0);
-  recList.innerHTML =
-    `<div class="adm-row"><span><b>Total recaudado: ${fmtPrecio(total)}</b></span></div>` +
-    (rows.length
-      ? rows.map((r) =>
-          `<div class="adm-row"><span>${fmtFecha(r.fecha || r.created_at)} &middot; ${esc(r.origen || "—")} &middot; <span style="color:var(--accent-2)">${fmtPrecio(r.monto)}</span></span>` +
-          `<button type="button" data-rec-del="${r.id}">Quitar</button></div>`
-        ).join("")
-      : `<p class="adm-msg">Aún no hay aportes registrados.</p>`);
+  const { data, error } = await sb.from("config").select("recaudo_total,updated_at").eq("id", 1).maybeSingle();
+  if (error) { recMsg.textContent = "No se pudo cargar."; return; }
+  const total = data ? (Number(data.recaudo_total) || 0) : 0;
+  recForm.total.value = total ? String(total) : "";
+  recMsg.textContent =
+    "Total actual: " + fmtPrecio(total) +
+    (data && data.updated_at ? " · actualizado " + fmtFecha(data.updated_at) : "");
 }
 
 recForm.addEventListener("submit", async (e) => {
@@ -1554,37 +1514,11 @@ recForm.addEventListener("submit", async (e) => {
   const btn = recForm.querySelector('button[type="submit"]');
   btn.disabled = true;
   recMsg.textContent = "Guardando…";
-  const f = new FormData(recForm);
-  const monto = parseInt(String(f.get("monto") || "").replace(/[^\d]/g, ""), 10) || 0;
-  const origen = String(f.get("origen") || "").trim();
-  const fecha = String(f.get("fecha") || "").trim();
-  const nota = String(f.get("nota") || "").trim();
-  const payload = { monto, origen, nota: nota || null };
-  if (fecha) payload.fecha = fecha;
-  const { error } = await sb.from("aportes").insert(payload);
+  const total = parseInt(String(new FormData(recForm).get("total") || "").replace(/[^\d]/g, ""), 10) || 0;
+  const { error } = await sb.from("config").update({ recaudo_total: total, updated_at: new Date().toISOString() }).eq("id", 1);
   btn.disabled = false;
   if (error) { console.error(error); recMsg.textContent = "No se pudo guardar: " + (error.message || "error"); return; }
-  recForm.reset();
-  recMsg.textContent = "Aporte registrado.";
   await Promise.all([loadRecaudoAdmin(), loadRecaudo()]);
-});
-
-recList.addEventListener("click", async (e) => {
-  const b = e.target.closest("[data-rec-del]");
-  if (!b) return;
-  if (b.dataset.armed === "1") {
-    b.textContent = "Quitando…"; b.disabled = true;
-    const { error } = await sb.from("aportes").delete().eq("id", b.dataset.recDel);
-    if (error) { b.textContent = "Error"; b.disabled = false; return; }
-    await Promise.all([loadRecaudoAdmin(), loadRecaudo()]);
-    return;
-  }
-  b.dataset.armed = "1";
-  b.textContent = "¿Confirmar?";
-  b.classList.add("adm-confirm");
-  setTimeout(() => {
-    if (b.isConnected) { b.dataset.armed = ""; b.textContent = "Quitar"; b.classList.remove("adm-confirm"); }
-  }, 4000);
 });
 
 /* ---------- Arranque ---------- */

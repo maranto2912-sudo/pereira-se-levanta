@@ -156,7 +156,7 @@
   /* Carrusel de marcas */
   .carousel-wrap { position: relative; }
   .grid {
-    display: flex; gap: 16px; padding: 28px 2px 16px;
+    display: flex; align-items: flex-start; gap: 16px; padding: 28px 2px 16px;
     overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity;
     scrollbar-width: thin; scrollbar-color: var(--line) transparent;
     -webkit-overflow-scrolling: touch;
@@ -196,8 +196,10 @@
     border-radius: var(--radius) var(--radius) 0 0; border-bottom: 1px solid var(--line);
   }
   .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .cover.cover--fit { background: color-mix(in srgb, var(--c) 14%, var(--surface-2)); }
-  .cover.cover--fit img { object-fit: contain; }
+  /* Foto completa: el contenedor toma la altura real de la imagen, sin franjas. */
+  .cover.cover--fit { aspect-ratio: auto; }
+  .cover.cover--fit img { position: static; inset: auto; display: block; width: 100%; height: auto; object-fit: contain; }
+  .cover.cover--fit .ph { display: none; }
   .cover .ph {
     position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
     background: color-mix(in srgb, var(--c) 20%, var(--surface));
@@ -310,8 +312,9 @@
 
   .modal-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
   .modal-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .modal-cover.cover--fit { background: color-mix(in srgb, var(--c) 14%, var(--surface-2)); }
-  .modal-cover.cover--fit img { object-fit: contain; }
+  .modal-cover.cover--fit { aspect-ratio: auto; }
+  .modal-cover.cover--fit img { position: static; inset: auto; display: block; width: 100%; height: auto; object-fit: contain; }
+  .modal-cover.cover--fit .ph { display: none; }
   .modal-cover .ph {
     position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
     background: color-mix(in srgb, var(--c) 20%, var(--surface));
@@ -996,7 +999,7 @@ function coverHtml(m) {
   const img = m.imagen
     ? `<img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" loading="lazy" onerror="this.style.display='none'">`
     : "";
-  const fit = m.imagen_completa ? " cover--fit" : "";
+  const fit = (m.imagen && m.imagen_completa) ? " cover--fit" : "";
   return `<div class="cover${fit}" style="--c:${esc(m.color)}"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span>${img}</div>`;
 }
 function igHtml(m) {

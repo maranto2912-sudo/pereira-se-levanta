@@ -329,6 +329,10 @@
   .modal-dir { display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.4; color: var(--accent-3); text-decoration: none; }
   .modal-dir:hover { text-decoration: underline; }
   .modal-dir-label { display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .modal-sede { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 4px; }
+  .modal-sede .modal-dir { margin-top: 0; }
+  .modal-sede-wa { display: inline-flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .modal-sede-wa .ig { padding: 3px 8px; font-size: 10.5px; }
   .modal-row { margin-top: 20px; }
   .modal-row .prod-label { display: block; margin-bottom: 6px; }
   .modal-prod { font-size: 17px; font-weight: 500; line-height: 1.4; }
@@ -767,8 +771,8 @@
       <input name="precio" type="text" inputmode="numeric" required placeholder="Ej: 60000"></label>
     <label class="fld"><span>Instagram de la marca</span>
       <input name="instagram" type="text" placeholder="@tumarca"></label>
-    <label class="fld"><span>WhatsApp de la marca (para que la gente escriba)</span>
-      <input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567"></label>
+    <label class="fld"><span>WhatsApp de la marca (si cada sede tiene número distinto, sepáralos con ; en el mismo orden que las sedes)</span>
+      <input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567 ; 3009876543"></label>
     <label class="fld"><span>Tu nombre y teléfono *</span>
       <input name="contacto" type="text" required></label>
 
@@ -814,7 +818,7 @@
           <label class="fld"><span>Producto *</span><input name="producto" type="text" required></label>
           <label class="fld"><span>Precio (solo número) *</span><input name="precio" type="text" inputmode="numeric" required placeholder="60000"></label>
           <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
-          <label class="fld"><span>WhatsApp (para que la gente escriba)</span><input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567"></label>
+          <label class="fld"><span>WhatsApp (si cada sede tiene número distinto, sepáralos con ; en el mismo orden)</span><input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567 ; 3009876543"></label>
           <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
           <div class="fld-row">
             <label class="fld"><span>Color</span><input name="color" type="color" value="#793520"></label>
@@ -958,6 +962,12 @@ const sedesDe = (m) =>
     .split(/\s*;\s*|\n/)
     .map((s) => s.trim())
     .filter(Boolean);
+// Uno o varios WhatsApp (uno por sede, en el mismo orden), separados con ;
+const wasDe = (m) =>
+  String((m && m.whatsapp) || "")
+    .split(/\s*;\s*|\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
 const mapsUrlFor = (addr, ciudad) => {
   const q = [String(addr || "").trim(), String(ciudad || "").trim(), "Colombia"]
     .filter(Boolean)
@@ -1009,10 +1019,16 @@ function igHtml(m) {
 const waSvg =
   '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
   '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.48-.73-1.7-.82-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.22 7.4 7.4 0 0 1-1.36-1.7c-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.21.88 2.38 1 2.55.13.17 1.74 2.66 4.22 3.73.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.48-.6 1.69-1.19.2-.58.2-1.08.14-1.19-.05-.1-.22-.16-.47-.29z"/></svg>';
-function waHtml(m) {
-  const u = waUrl(m.whatsapp);
+function waLink(num, label) {
+  const u = waUrl(num);
   if (!u) return "";
-  return `<a class="ig wa" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${waSvg}WhatsApp</a>`;
+  return `<a class="ig wa" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${waSvg}${label || "WhatsApp"}</a>`;
+}
+// Botón de la tarjeta / pie del detalle: solo cuando hay UN número para toda la marca.
+function waHtml(m) {
+  const nums = wasDe(m);
+  if (nums.length !== 1) return "";
+  return waLink(nums[0]);
 }
 
 function rebuildCityFilter() {
@@ -1107,13 +1123,18 @@ function openModal(i) {
           <a class="modal-city" href="${mapsUrl(m)}" target="_blank" rel="noopener noreferrer" title="Ver en el mapa">${pinSvg}${esc(m.ciudad)}</a>
           ${(function () {
             const sedes = sedesDe(m);
+            const nums = wasDe(m);
             if (!sedes.length) return "";
             if (sedes.length === 1) {
-              return `<a class="modal-dir" href="${mapsUrlFor(sedes[0], m.ciudad)}" target="_blank" rel="noopener noreferrer">${esc(sedes[0])}</a>`;
+              return `<a class="modal-dir" href="${mapsUrlFor(sedes[0], m.ciudad)}" target="_blank" rel="noopener noreferrer">${esc(sedes[0])}</a>` +
+                (nums.length > 1 ? `<span class="modal-sede-wa">${nums.map((n) => waLink(n)).join("")}</span>` : "");
             }
             return `<span class="modal-dir-label">${sedes.length} sedes</span>` +
               sedes.map((s, i) =>
-                `<a class="modal-dir" href="${mapsUrlFor(s, m.ciudad)}" target="_blank" rel="noopener noreferrer">${i + 1}. ${esc(s)}</a>`
+                `<div class="modal-sede">` +
+                  `<a class="modal-dir" href="${mapsUrlFor(s, m.ciudad)}" target="_blank" rel="noopener noreferrer">${i + 1}. ${esc(s)}</a>` +
+                  (nums[i] ? `<span class="modal-sede-wa">${waLink(nums[i], "WhatsApp")}</span>` : "") +
+                `</div>`
               ).join("");
           })()}
         </span>

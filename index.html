@@ -196,6 +196,8 @@
     border-radius: var(--radius) var(--radius) 0 0; border-bottom: 1px solid var(--line);
   }
   .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cover.cover--fit { background: color-mix(in srgb, var(--c) 14%, var(--surface-2)); }
+  .cover.cover--fit img { object-fit: contain; }
   .cover .ph {
     position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
     background: color-mix(in srgb, var(--c) 20%, var(--surface));
@@ -239,6 +241,8 @@
     border-radius: 100px; padding: 4px 10px; transition: color .14s ease, border-color .14s ease;
   }
   .ig:hover { color: var(--accent); border-color: var(--accent); }
+  .ig.wa { color: var(--accent-3); }
+  .ig.wa:hover { color: var(--accent-3); border-color: var(--accent-3); }
 
   .empty { padding: 60px 0 80px; text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; }
   .empty[hidden] { display: none; }
@@ -306,6 +310,8 @@
 
   .modal-cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
   .modal-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .modal-cover.cover--fit { background: color-mix(in srgb, var(--c) 14%, var(--surface-2)); }
+  .modal-cover.cover--fit img { object-fit: contain; }
   .modal-cover .ph {
     position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
     background: color-mix(in srgb, var(--c) 20%, var(--surface));
@@ -319,6 +325,7 @@
   .modal-city { font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; margin-top: 4px; text-decoration: none; width: fit-content; transition: color .14s ease; }
   .modal-dir { display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.4; color: var(--accent-3); text-decoration: none; }
   .modal-dir:hover { text-decoration: underline; }
+  .modal-dir-label { display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
   .modal-row { margin-top: 20px; }
   .modal-row .prod-label { display: block; margin-bottom: 6px; }
   .modal-prod { font-size: 17px; font-weight: 500; line-height: 1.4; }
@@ -346,6 +353,11 @@
     border: 1px solid var(--line); border-radius: 7px; padding: 9px 11px; outline: none; width: 100%;
   }
   .fld input:focus { border-color: var(--accent); }
+  .fld-check { display: flex; flex-direction: row; align-items: center; gap: 9px; }
+  .fld-check input { width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
+  .fld-check span { font-family: var(--font-body); font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ink); }
+  .adm-edit-badge { margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--accent); }
+  .adm-row-actions { display: flex; gap: 6px; flex: none; }
   .fld input[type="color"] { height: 38px; padding: 3px; cursor: pointer; }
   .fld-row { display: flex; gap: 12px; }
   .fld-row .fld { flex: 1; min-width: 0; }
@@ -744,14 +756,16 @@
       <input name="marca" type="text" required autocomplete="organization"></label>
     <label class="fld"><span>Ciudad *</span>
       <input name="ciudad" type="text" required></label>
-    <label class="fld"><span>Dirección del local</span>
-      <input name="direccion" type="text" placeholder="Cra 8 # 20-30, Centro"></label>
+    <label class="fld"><span>Dirección del local (si hay varias sedes, sepáralas con ; )</span>
+      <input name="direccion" type="text" placeholder="Cra 8 # 20-30, Centro ; Cl 14 # 23-05, Circunvalar"></label>
     <label class="fld"><span>Producto con el que participas *</span>
       <input name="producto" type="text" required></label>
     <label class="fld"><span>Precio del producto *</span>
       <input name="precio" type="text" inputmode="numeric" required placeholder="Ej: 60000"></label>
     <label class="fld"><span>Instagram de la marca</span>
       <input name="instagram" type="text" placeholder="@tumarca"></label>
+    <label class="fld"><span>WhatsApp de la marca (para que la gente escriba)</span>
+      <input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567"></label>
     <label class="fld"><span>Tu nombre y teléfono *</span>
       <input name="contacto" type="text" required></label>
 
@@ -790,18 +804,22 @@
 
       <div class="adm-view" data-view="marcas">
         <form class="insc-form" id="admForm">
+          <p class="adm-edit-badge" id="admEditBadge" hidden>✎ Editando una marca existente</p>
           <label class="fld"><span>Nombre *</span><input name="nombre" type="text" required></label>
           <label class="fld"><span>Ciudad *</span><input name="ciudad" type="text" required></label>
-          <label class="fld"><span>Dirección del local</span><input name="direccion" type="text" placeholder="Cra 8 # 20-30, Centro"></label>
+          <label class="fld"><span>Dirección del local (varias sedes: sepáralas con ; )</span><input name="direccion" type="text" placeholder="Cra 8 # 20-30 ; Cl 14 # 23-05"></label>
           <label class="fld"><span>Producto *</span><input name="producto" type="text" required></label>
           <label class="fld"><span>Precio (solo número) *</span><input name="precio" type="text" inputmode="numeric" required placeholder="60000"></label>
           <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
+          <label class="fld"><span>WhatsApp (para que la gente escriba)</span><input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567"></label>
           <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
           <div class="fld-row">
             <label class="fld"><span>Color</span><input name="color" type="color" value="#793520"></label>
             <label class="fld"><span>Foto (opcional)</span><input name="imagen" type="file" accept="image/*"></label>
           </div>
+          <label class="fld-check"><input name="imagen_completa" type="checkbox"><span>Mostrar la foto completa, sin recortar</span></label>
           <button class="btn-solid" style="justify-content:center" id="admSave" type="submit">Agregar marca</button>
+          <button class="btn-ghost" style="justify-content:center" id="admCancelEdit" type="button" hidden>Cancelar edición</button>
         </form>
         <p class="adm-msg" id="admMsg"></p>
         <div class="adm-list" id="admMarcasList"></div>
@@ -918,15 +936,34 @@ function igLabel(v) {
   const h = v.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[/?#].*$/, "").replace(/^@/, "");
   return "@" + h;
 }
+function waUrl(v) {
+  if (!v) return "";
+  const s = String(v).trim();
+  if (/^https?:\/\//i.test(s)) return s; // ya es un enlace wa.me / api.whatsapp
+  const d = s.replace(/\D/g, "");
+  if (!d) return "";
+  const full = d.length <= 10 ? "57" + d : d; // sin indicativo => Colombia
+  return "https://wa.me/" + full;
+}
 const pinSvg =
   '<svg width="11" height="12" viewBox="0 0 14 16" fill="none" aria-hidden="true">' +
   '<path d="M7 1C4.2 1 2 3.1 2 5.7 2 9.2 7 15 7 15s5-5.8 5-9.3C12 3.1 9.8 1 7 1z" stroke="currentColor" stroke-width="1.6"/>' +
   '<circle cx="7" cy="5.6" r="1.7" stroke="currentColor" stroke-width="1.6"/></svg>';
+// Una marca puede tener varias sedes: en "direccion" se separan con  ;
+const sedesDe = (m) =>
+  String((m && m.direccion) || "")
+    .split(/\s*;\s*|\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+const mapsUrlFor = (addr, ciudad) => {
+  const q = [String(addr || "").trim(), String(ciudad || "").trim(), "Colombia"]
+    .filter(Boolean)
+    .join(", ");
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+};
 const mapsUrl = (m) => {
-  const dir = (m && m.direccion || "").trim();
-  const ciu = (m && m.ciudad || "").trim();
-  const q = dir ? `${dir}, ${ciu}, Colombia` : `${ciu}, Colombia`;
-  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q.replace(/^,\s*/, "").trim());
+  const sedes = sedesDe(m);
+  return mapsUrlFor(sedes[0] || "", m && m.ciudad);
 };
 const camSvg =
   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
@@ -959,11 +996,20 @@ function coverHtml(m) {
   const img = m.imagen
     ? `<img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" loading="lazy" onerror="this.style.display='none'">`
     : "";
-  return `<div class="cover"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span>${img}</div>`;
+  const fit = m.imagen_completa ? " cover--fit" : "";
+  return `<div class="cover${fit}" style="--c:${esc(m.color)}"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span>${img}</div>`;
 }
 function igHtml(m) {
   if (!m.instagram) return "";
   return `<a class="ig" href="${esc(igUrl(m.instagram))}" target="_blank" rel="noopener noreferrer">${igSvg}${esc(igLabel(m.instagram))}</a>`;
+}
+const waSvg =
+  '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+  '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.48-.73-1.7-.82-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.22 7.4 7.4 0 0 1-1.36-1.7c-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.21.88 2.38 1 2.55.13.17 1.74 2.66 4.22 3.73.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.48-.6 1.69-1.19.2-.58.2-1.08.14-1.19-.05-.1-.22-.16-.47-.29z"/></svg>';
+function waHtml(m) {
+  const u = waUrl(m.whatsapp);
+  if (!u) return "";
+  return `<a class="ig wa" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${waSvg}WhatsApp</a>`;
 }
 
 function rebuildCityFilter() {
@@ -1001,13 +1047,14 @@ function render() {
         <span class="logo" style="background:${esc(m.color)}">${esc(initials(m.nombre))}</span>
         <span>
           <button class="card-open" type="button" data-i="${m._i}" aria-haspopup="dialog">${esc(m.nombre)}</button>
-          <a class="brand-city" href="${mapsUrl(m)}" target="_blank" rel="noopener noreferrer" title="${esc(m.direccion || m.ciudad)} — ver en el mapa">${pinSvg}${esc(m.ciudad)}</a>
+          <a class="brand-city" href="${mapsUrl(m)}" target="_blank" rel="noopener noreferrer" title="Ver ubicación en el mapa">${pinSvg}${esc(m.ciudad)}${sedesDe(m).length > 1 ? ` · ${sedesDe(m).length} sedes` : ""}</a>
         </span>
       </div>
       <div class="card-body">
         <span class="prod-name">${esc(m.producto)}</span>
         <div class="card-foot">
           <span class="tag">${fmtPrecio(m.precio)}</span>
+          ${waHtml(m)}
           ${igHtml(m)}
         </div>
       </div>
@@ -1045,7 +1092,7 @@ function openModal(i) {
   if (!m) return;
   lastFocus = document.activeElement;
   const cover = m.imagen
-    ? `<div class="modal-cover"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span><img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" onerror="this.style.display='none'"></div>`
+    ? `<div class="modal-cover${m.imagen_completa ? " cover--fit" : ""}" style="--c:${esc(m.color)}"><span class="ph" style="--c:${esc(m.color)}">${camSvg}Foto del producto</span><img src="${esc(m.imagen)}" alt="Producto de ${esc(m.nombre)}" onerror="this.style.display='none'"></div>`
     : "";
   modalInner.innerHTML = `
     ${cover}
@@ -1055,7 +1102,17 @@ function openModal(i) {
         <span>
           <div class="modal-name">${esc(m.nombre)}</div>
           <a class="modal-city" href="${mapsUrl(m)}" target="_blank" rel="noopener noreferrer" title="Ver en el mapa">${pinSvg}${esc(m.ciudad)}</a>
-          ${m.direccion ? `<a class="modal-dir" href="${mapsUrl(m)}" target="_blank" rel="noopener noreferrer">${esc(m.direccion)}</a>` : ""}
+          ${(function () {
+            const sedes = sedesDe(m);
+            if (!sedes.length) return "";
+            if (sedes.length === 1) {
+              return `<a class="modal-dir" href="${mapsUrlFor(sedes[0], m.ciudad)}" target="_blank" rel="noopener noreferrer">${esc(sedes[0])}</a>`;
+            }
+            return `<span class="modal-dir-label">${sedes.length} sedes</span>` +
+              sedes.map((s, i) =>
+                `<a class="modal-dir" href="${mapsUrlFor(s, m.ciudad)}" target="_blank" rel="noopener noreferrer">${i + 1}. ${esc(s)}</a>`
+              ).join("");
+          })()}
         </span>
       </div>
       <div class="modal-row">
@@ -1064,7 +1121,7 @@ function openModal(i) {
       </div>
       <div class="modal-foot">
         <span><span class="prod-label">Precio en feria</span><span class="tag">${fmtPrecio(m.precio)}</span></span>
-        ${igHtml(m)}
+        <span style="display:flex;gap:8px;flex-wrap:wrap">${waHtml(m)}${igHtml(m)}</span>
       </div>
     </div>`;
   if (typeof modal.showModal === "function") modal.showModal();
@@ -1113,7 +1170,9 @@ async function loadMarcas() {
     color: m.color || "#793520",
     nota: m.nota || "",
     instagram: m.instagram || "",
-    imagen: m.imagen || ""
+    whatsapp: m.whatsapp || "",
+    imagen: m.imagen || "",
+    imagen_completa: !!m.imagen_completa
   }));
   rebuildCityFilter();
   render();
@@ -1214,6 +1273,7 @@ inscForm.addEventListener("submit", async (e) => {
     producto: g("producto"),
     precio: g("precio"),
     instagram: g("instagram") || null,
+    whatsapp: g("whatsapp") || null,
     contacto: g("contacto")
   });
   btn.disabled = false;
@@ -1273,9 +1333,13 @@ const admMarcasList = document.getElementById("admMarcasList");
 const admInscList = document.getElementById("admInscList");
 const admInscMsg = document.getElementById("admInscMsg");
 const admBadge = document.getElementById("admBadge");
+const admCancelEdit = document.getElementById("admCancelEdit");
+const admEditBadge = document.getElementById("admEditBadge");
 const recForm = document.getElementById("recForm");
 const recMsg = document.getElementById("recMsg");
 let admLastFocus = null;
+let editingId = null;
+let ADM_MARCAS = [];
 
 async function refreshAdminSession() {
   const { data: { session } } = await sb.auth.getSession();
@@ -1355,18 +1419,47 @@ async function uploadFoto(file) {
   return sb.storage.from("fotos").getPublicUrl(path).data.publicUrl;
 }
 
-/* ----- agregar marca ----- */
+/* ----- agregar / editar marca ----- */
+function endEdit() {
+  editingId = null;
+  admForm.reset();
+  admSave.textContent = "Agregar marca";
+  admCancelEdit.hidden = true;
+  admEditBadge.hidden = true;
+}
+function startEdit(m) {
+  editingId = m.id;
+  admForm.nombre.value = m.nombre || "";
+  admForm.ciudad.value = m.ciudad || "";
+  admForm.direccion.value = m.direccion || "";
+  admForm.producto.value = m.producto || "";
+  admForm.precio.value = m.precio != null ? String(m.precio) : "";
+  admForm.instagram.value = m.instagram || "";
+  admForm.whatsapp.value = m.whatsapp || "";
+  admForm.nota.value = m.nota || "";
+  admForm.color.value = m.color || "#793520";
+  admForm.imagen.value = "";
+  admForm.imagen_completa.checked = !!m.imagen_completa;
+  admSave.textContent = "Guardar cambios";
+  admCancelEdit.hidden = false;
+  admEditBadge.hidden = false;
+  admMsg.textContent = "";
+  admForm.scrollIntoView({ block: "start" });
+  admForm.nombre.focus();
+}
+admCancelEdit.addEventListener("click", endEdit);
+
 admForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   admSave.disabled = true;
-  admMsg.textContent = "Guardando…";
+  admMsg.textContent = editingId ? "Guardando cambios…" : "Guardando…";
   const f = new FormData(admForm);
   const val = (k) => (f.get(k) || "").toString().trim();
   try {
-    let imagen = null;
+    let imagen; // undefined = no tocar la foto actual
     const file = f.get("imagen");
     if (file && file.size) { admMsg.textContent = "Subiendo foto…"; imagen = await uploadFoto(file); }
-    const { error } = await sb.from("marcas").insert({
+    const fields = {
       nombre: val("nombre"),
       ciudad: val("ciudad"),
       direccion: val("direccion") || null,
@@ -1375,12 +1468,22 @@ admForm.addEventListener("submit", async (e) => {
       color: val("color") || "#793520",
       nota: val("nota") || null,
       instagram: val("instagram") || null,
-      imagen: imagen,
+      whatsapp: val("whatsapp") || null,
+      imagen_completa: admForm.imagen_completa.checked,
       publicada: true
-    });
+    };
+    if (imagen !== undefined) fields.imagen = imagen;
+    let error;
+    if (editingId) {
+      ({ error } = await sb.from("marcas").update(fields).eq("id", editingId));
+    } else {
+      fields.imagen = imagen || null;
+      ({ error } = await sb.from("marcas").insert(fields));
+    }
     if (error) throw error;
-    admForm.reset();
-    admMsg.textContent = "Marca agregada y publicada.";
+    const wasEdit = !!editingId;
+    endEdit();
+    admMsg.textContent = wasEdit ? "Cambios guardados." : "Marca agregada y publicada.";
     await Promise.all([loadMarcas(), loadAdminMarcas()]);
   } catch (err) {
     console.error(err);
@@ -1390,14 +1493,15 @@ admForm.addEventListener("submit", async (e) => {
   }
 });
 
-/* ----- lista de marcas + quitar ----- */
+/* ----- lista de marcas: editar / quitar ----- */
 async function loadAdminMarcas() {
-  const { data, error } = await sb.from("marcas").select("id,nombre,ciudad").order("orden", { ascending: true }).order("id", { ascending: true });
+  const { data, error } = await sb.from("marcas").select("*").order("orden", { ascending: true }).order("id", { ascending: true });
   if (error) { admMarcasList.innerHTML = ""; return; }
+  ADM_MARCAS = data || [];
   admMarcasList.innerHTML =
-    (data || []).map((m) =>
+    ADM_MARCAS.map((m) =>
       `<div class="adm-row"><span>${esc(m.nombre)} &middot; <span style="color:var(--muted)">${esc(m.ciudad)}</span></span>` +
-      `<button type="button" data-del-marca="${m.id}">Quitar</button></div>`
+      `<span class="adm-row-actions"><button type="button" data-edit-marca="${m.id}">Editar</button><button type="button" data-del-marca="${m.id}">Quitar</button></span></div>`
     ).join("") || `<p class="adm-msg">Aún no hay marcas.</p>`;
 }
 let pendM = null;
@@ -1408,6 +1512,12 @@ function clearPendM() {
   pendM = null;
 }
 admMarcasList.addEventListener("click", async (e) => {
+  const eb = e.target.closest("[data-edit-marca]");
+  if (eb) {
+    const m = ADM_MARCAS.find((x) => String(x.id) === eb.dataset.editMarca);
+    if (m) startEdit(m);
+    return;
+  }
   const b = e.target.closest("[data-del-marca]");
   if (!b) return;
   const id = b.dataset.delMarca;
@@ -1416,6 +1526,7 @@ admMarcasList.addEventListener("click", async (e) => {
     b.textContent = "Quitando…"; b.disabled = true;
     const { error } = await sb.from("marcas").delete().eq("id", id);
     if (error) { b.textContent = "Error"; b.disabled = false; return; }
+    if (String(editingId) === String(id)) endEdit();
     await Promise.all([loadMarcas(), loadAdminMarcas()]);
     return;
   }
@@ -1447,7 +1558,7 @@ async function loadInscripciones() {
       <div class="adm-insc-h"><b>${esc(r.marca)}</b><time>${esc(fecha)}</time></div>
       <div class="adm-insc-meta">${esc(r.ciudad)} &middot; ${esc(r.producto)} &middot; $${esc(r.precio || "—")}</div>
       ${r.direccion ? `<div class="adm-insc-meta">📍 ${esc(r.direccion)}</div>` : ""}
-      <div class="adm-insc-meta">${esc(r.contacto)}${r.instagram ? " &middot; " + esc(r.instagram) : ""}</div>
+      <div class="adm-insc-meta">${esc(r.contacto)}${r.instagram ? " &middot; " + esc(r.instagram) : ""}${r.whatsapp ? " &middot; WA " + esc(r.whatsapp) : ""}</div>
       <div class="adm-insc-actions">
         ${r.estado === "nueva" ? `<button type="button" data-insc-aprob="${r.id}">Aprobar y publicar</button>` : ""}
         <button type="button" data-insc-arch="${r.id}">Archivar</button>
@@ -1467,7 +1578,7 @@ admInscList.addEventListener("click", async (e) => {
       await sb.from("marcas").insert({
         nombre: row.marca, ciudad: row.ciudad, direccion: row.direccion || null, producto: row.producto,
         precio: parseInt(String(row.precio || "").replace(/[^\d]/g, ""), 10) || 0,
-        instagram: row.instagram || null, color: "#793520", publicada: true
+        instagram: row.instagram || null, whatsapp: row.whatsapp || null, color: "#793520", publicada: true
       });
       await sb.from("inscripciones").update({ estado: "aprobada" }).eq("id", row.id);
       await Promise.all([loadMarcas(), loadAdminMarcas(), loadInscripciones()]);

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pereira se levanta</title>
+<title>La querendona renace</title>
 <meta name="description" content="Feria de Marcas y Pequeñas Empresas del Eje Cafetero. Conoce las marcas que participan; cada compra apoya al comercio local y a las familias afectadas por el terremoto.">
-<meta property="og:title" content="Pereira se levanta — Feria de Marcas y Pequeñas Empresas">
+<meta property="og:title" content="La querendona renace — Feria de Marcas y Pequeñas Empresas">
 <meta property="og:description" content="Conoce las marcas del Eje Cafetero que participan. Cada visita y cada compra apoya al comercio local y a las familias afectadas por el terremoto.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F7EFE1">
@@ -96,8 +96,8 @@
     margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
     line-height: 0.92; letter-spacing: -0.02em; display: flex; flex-direction: column;
   }
-  .wordmark .l1 { font-size: clamp(2.6rem, 10.5vw, 6rem); }
-  .wordmark .l2 { font-size: clamp(1.5rem, 6vw, 3.3rem); color: var(--accent); }
+  .wordmark .l1 { font-size: clamp(2rem, 7.2vw, 4.3rem); }
+  .wordmark .l2 { font-size: clamp(1.7rem, 6vw, 3.6rem); color: var(--accent); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
   .chip {
     font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.03em; white-space: nowrap;
@@ -477,8 +477,8 @@
     .masthead { gap: 22px; padding: 24px 0 30px; }
     .masthead-aside { flex-direction: row; align-items: flex-start; flex-wrap: wrap; gap: 14px; }
     .kevin-fig img { width: 150px; }
-    .wordmark .l1 { font-size: clamp(2.2rem, 13.5vw, 3.1rem); }
-    .wordmark .l2 { font-size: clamp(1.3rem, 7vw, 1.8rem); }
+    .wordmark .l1 { font-size: clamp(1.7rem, 9vw, 2.4rem); }
+    .wordmark .l2 { font-size: clamp(1.5rem, 8vw, 2.1rem); }
     .kicker { font-size: 11px; margin-bottom: 10px; }
     .chips { gap: 6px; margin-top: 14px; }
     .chip { font-size: 11px; padding: 5px 10px; }
@@ -549,8 +549,8 @@
     <div class="masthead-main">
       <p class="kicker">Feria de Marcas y Pequeñas Empresas</p>
       <h1 class="wordmark">
-        <span class="l1">Pereira</span>
-        <span class="l2">se levanta</span>
+        <span class="l1">La querendona</span>
+        <span class="l2">renace</span>
       </h1>
       <div class="chips">
         <span class="chip">Pereira, Risaralda</span>
@@ -665,7 +665,7 @@
     <div class="foot-brand">
       <span class="logo-mark md" data-logo></span>
       <span>
-        <b>Pereira se levanta</b><br>
+        <b>La querendona renace</b><br>
         <span class="brand-sub" style="color:var(--accent-2)">by</span> <span class="foot-by">Comunidad Sáchi</span>
       </span>
     </div>
@@ -687,7 +687,7 @@
     <span class="logo-mark lg" data-logo></span>
     <p class="intro-credit">by <b>Comunidad Sáchi</b></p>
     <p class="intro-slogan">Pereira · la querendona, trasnochadora y morena</p>
-    <h2 id="introTitle">Pereira se levanta</h2>
+    <h2 id="introTitle">La querendona renace</h2>
     <div class="intro-body">
       <p><b>Feria de Marcas y Pequeñas Empresas</b> del Eje Cafetero, muchas golpeadas por el
          terremoto.</p>
@@ -706,7 +706,7 @@
   <button class="close-btn" id="orgsClose" type="button" aria-label="Cerrar">✕</button>
   <div class="modal-pad">
     <h2 id="orgsTitle" class="insc-title">Organizadores</h2>
-    <p class="insc-hint">Comunidad Sáchi — las personas detrás de "Pereira se levanta".</p>
+    <p class="insc-hint">Comunidad Sáchi — las personas detrás de "La querendona renace".</p>
     <ul class="orgs-list">
       <li>
         <span class="org-name">Kevin Sáchica</span>
@@ -849,7 +849,7 @@ document.documentElement.setAttribute("data-theme", "light");
    La imagen real va en el archivo  logo.png  (súbelo al repo, junto a index.html).
    Ideal: PNG con fondo transparente. Si logo.png no existe, se muestra el dibujo de abajo. */
 const LOGO_FALLBACK = `
-  <svg viewBox="0 0 120 120" role="img" aria-label="Pereira se levanta" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 120 120" role="img" aria-label="La querendona renace" xmlns="http://www.w3.org/2000/svg">
     <circle cx="60" cy="60" r="59" fill="#F0E6D5"/>
     <g stroke="#3C6B3E" stroke-width="2.4" stroke-linecap="round" fill="none">
       <path d="M83 98 q11 -3 19 -15"/><path d="M28 96 q-9 -4 -14 -14"/>
@@ -870,7 +870,7 @@ const LOGO_FALLBACK = `
     <path d="M42 41 C 50 46, 70 46, 78 41 L 78 44 C 70 49, 50 49, 42 44 Z" fill="#6E4A2C"/>
   </svg>`;
 document.querySelectorAll("[data-logo]").forEach((el) => {
-  el.innerHTML = '<img src="logo.png" alt="Pereira se levanta">';
+  el.innerHTML = '<img src="logo.png" alt="La querendona renace">';
   const img = el.querySelector("img");
   img.addEventListener("error", () => { el.innerHTML = LOGO_FALLBACK; }, { once: true });
 });
@@ -1231,7 +1231,7 @@ inscForm.addEventListener("submit", async (e) => {
 document.querySelectorAll("[data-seguimiento]").forEach((a) => { a.href = ENLACE_SEGUIMIENTO; });
 
 const pageUrl = window.location.href.split("#")[0];
-const shareMsg = "Pereira se levanta — feria de marcas del Eje Cafetero. Conócelas y apoya:";
+const shareMsg = "La querendona renace — feria de marcas del Eje Cafetero. Conócelas y apoya:";
 const shWpp = document.getElementById("shWpp");
 if (shWpp) shWpp.href = "https://wa.me/?text=" + encodeURIComponent(shareMsg + " " + pageUrl);
 const shFb = document.getElementById("shFb");

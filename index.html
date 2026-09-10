@@ -827,6 +827,7 @@
           <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
           <label class="fld"><span>WhatsApp (si cada sede tiene número distinto, sepáralos con ; en el mismo orden)</span><input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567 ; 3009876543"></label>
           <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
+          <label class="fld"><span>Orden en la página (número: menor aparece primero. Déjalo vacío para que vaya al final)</span><input name="orden" type="number" inputmode="numeric" min="1" placeholder="1, 2, 3…"></label>
           <div class="fld-row">
             <label class="fld"><span>Color</span><input name="color" type="color" value="#793520"></label>
             <label class="fld"><span>Foto (opcional)</span><input name="imagen" type="file" accept="image/*"></label>
@@ -1182,12 +1183,20 @@ sortEl.addEventListener("change", render);
 /* ---------- Cargar marcas desde Supabase ---------- */
 async function loadMarcas() {
   if (!MARCAS.length) grid.innerHTML = `<p class="grid-note">Cargando marcas…</p>`;
-  const { data, error } = await sb
+  let { data, error } = await sb
     .from("marcas")
     .select("*")
     .eq("publicada", true)
-    .order("orden", { ascending: true })
+    .order("orden", { ascending: true, nullsFirst: false })
     .order("id", { ascending: true });
+  if (error) {
+    // Si aún no existe la columna "orden", ordena solo por id.
+    ({ data, error } = await sb
+      .from("marcas")
+      .select("*")
+      .eq("publicada", true)
+      .order("id", { ascending: true }));
+  }
   if (error) {
     console.error(error);
     grid.innerHTML = `<p class="grid-note">No se pudieron cargar las marcas. Revisa tu conexión y recarga.</p>`;
@@ -1206,7 +1215,8 @@ async function loadMarcas() {
     instagram: m.instagram || "",
     whatsapp: m.whatsapp || "",
     imagen: m.imagen || "",
-    imagen_completa: !!m.imagen_completa
+    imagen_completa: !!m.imagen_completa,
+    orden: m.orden != null ? Number(m.orden) : null
   }));
   rebuildCityFilter();
   render();
@@ -1471,6 +1481,7 @@ function startEdit(m) {
   admForm.instagram.value = m.instagram || "";
   admForm.whatsapp.value = m.whatsapp || "";
   admForm.nota.value = m.nota || "";
+  admForm.orden.value = m.orden != null ? String(m.orden) : "";
   admForm.color.value = m.color || "#793520";
   admForm.imagen.value = "";
   admForm.imagen_completa.checked = !!m.imagen_completa;
@@ -1504,6 +1515,7 @@ admForm.addEventListener("submit", async (e) => {
       instagram: val("instagram") || null,
       whatsapp: val("whatsapp") || null,
       imagen_completa: admForm.imagen_completa.checked,
+      orden: val("orden") === "" ? null : (parseInt(val("orden").replace(/[^\d]/g, ""), 10) || null),
       publicada: true
     };
     if (imagen !== undefined) fields.imagen = imagen;
@@ -1529,12 +1541,17 @@ admForm.addEventListener("submit", async (e) => {
 
 /* ----- lista de marcas: editar / quitar ----- */
 async function loadAdminMarcas() {
-  const { data, error } = await sb.from("marcas").select("*").order("orden", { ascending: true }).order("id", { ascending: true });
+  let { data, error } = await sb.from("marcas").select("*").order("orden", { ascending: true, nullsFirst: false }).order("id", { ascending: true });
+  if (error) { ({ data, error } = await sb.from("marcas").select("*").order("id", { ascending: true })); }
   if (error) { admMarcasList.innerHTML = ""; return; }
-  ADM_MARCAS = data || [];
+  ADM_MARCAS = (data || []).slice().sort((a, b) => {
+    const ao = a.orden == null ? Infinity : Number(a.orden);
+    const bo = b.orden == null ? Infinity : Number(b.orden);
+    return ao - bo || a.id - b.id;
+  });
   admMarcasList.innerHTML =
     ADM_MARCAS.map((m) =>
-      `<div class="adm-row"><span>${esc(m.nombre)} &middot; <span style="color:var(--muted)">${esc(m.ciudad)}</span></span>` +
+      `<div class="adm-row"><span>${m.orden != null ? `<b>${esc(String(m.orden))}.</b> ` : ""}${esc(m.nombre)} &middot; <span style="color:var(--muted)">${esc(m.ciudad)}</span></span>` +
       `<span class="adm-row-actions"><button type="button" data-edit-marca="${m.id}">Editar</button><button type="button" data-del-marca="${m.id}">Quitar</button></span></div>`
     ).join("") || `<p class="adm-msg">Aún no hay marcas.</p>`;
 }

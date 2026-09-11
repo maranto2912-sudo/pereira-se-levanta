@@ -255,6 +255,8 @@
   .ig:hover { color: var(--accent); border-color: var(--accent); }
   .ig.wa { color: var(--accent-3); }
   .ig.wa:hover { color: var(--accent-3); border-color: var(--accent-3); }
+  .ig.web { color: var(--accent-2); }
+  .ig.web:hover { color: var(--accent-2); border-color: var(--accent-2); }
 
   .empty { padding: 60px 0 80px; text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; }
   .empty[hidden] { display: none; }
@@ -781,6 +783,8 @@
       <input name="precio" type="text" inputmode="numeric" required placeholder="Ej: 60000"></label>
     <label class="fld"><span>Instagram de la marca</span>
       <input name="instagram" type="text" placeholder="@tumarca"></label>
+    <label class="fld"><span>Página web (opcional)</span>
+      <input name="pagina_web" type="text" placeholder="www.tumarca.com"></label>
     <label class="fld"><span>WhatsApp de la marca (si cada sede tiene número distinto, sepáralos con ; en el mismo orden que las sedes)</span>
       <input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567 ; 3009876543"></label>
     <label class="fld"><span>Tu nombre y teléfono *</span>
@@ -828,6 +832,7 @@
           <label class="fld"><span>Producto *</span><input name="producto" type="text" required></label>
           <label class="fld"><span>Precio (solo número) *</span><input name="precio" type="text" inputmode="numeric" required placeholder="60000"></label>
           <label class="fld"><span>Instagram</span><input name="instagram" type="text" placeholder="@marca"></label>
+          <label class="fld"><span>Página web (opcional)</span><input name="pagina_web" type="text" placeholder="www.tumarca.com"></label>
           <label class="fld"><span>WhatsApp (si cada sede tiene número distinto, sepáralos con ; en el mismo orden)</span><input name="whatsapp" type="text" inputmode="tel" placeholder="3001234567 ; 3009876543"></label>
           <label class="fld"><span>Nota (opcional)</span><input name="nota" type="text"></label>
           <label class="fld"><span>Orden en la página (número: menor aparece primero. Déjalo vacío para que vaya al final)</span><input name="orden" type="number" inputmode="numeric" min="1" placeholder="1, 2, 3…"></label>
@@ -1034,6 +1039,23 @@ function igHtml(m) {
   if (!m.instagram) return "";
   return `<a class="ig" href="${esc(igUrl(m.instagram))}" target="_blank" rel="noopener noreferrer">${igSvg}${esc(igLabel(m.instagram))}</a>`;
 }
+const webSvg =
+  '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">' +
+  '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>' +
+  '<path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>';
+function webUrl(v) {
+  if (!v) return "";
+  const s = v.trim();
+  return /^https?:\/\//i.test(s) ? s : "https://" + s;
+}
+function webLabel(v) {
+  if (!v) return "";
+  return v.trim().replace(/^https?:\/\//i, "").replace(/^www\./i, "").replace(/\/$/, "");
+}
+function webHtml(m) {
+  if (!m.pagina_web) return "";
+  return `<a class="ig web" href="${esc(webUrl(m.pagina_web))}" target="_blank" rel="noopener noreferrer">${webSvg}${esc(webLabel(m.pagina_web))}</a>`;
+}
 const waSvg =
   '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
   '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.48-.73-1.7-.82-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.22 7.4 7.4 0 0 1-1.36-1.7c-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.09-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.21.88 2.38 1 2.55.13.17 1.74 2.66 4.22 3.73.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.48-.6 1.69-1.19.2-.58.2-1.08.14-1.19-.05-.1-.22-.16-.47-.29z"/></svg>';
@@ -1093,6 +1115,7 @@ function render() {
           ${precioTag(m)}
           ${waHtml(m)}
           ${igHtml(m)}
+          ${webHtml(m)}
         </div>
       </div>
     </article>`
@@ -1163,7 +1186,7 @@ function openModal(i) {
       </div>
       <div class="modal-foot">
         <span>${Number(m.precio) > 0 ? `<span class="prod-label">Precio en feria</span>` : ""}${precioTag(m)}</span>
-        <span style="display:flex;gap:8px;flex-wrap:wrap">${waHtml(m)}${igHtml(m)}</span>
+        <span style="display:flex;gap:8px;flex-wrap:wrap">${waHtml(m)}${igHtml(m)}${webHtml(m)}</span>
       </div>
     </div>`;
   if (typeof modal.showModal === "function") modal.showModal();
@@ -1221,6 +1244,7 @@ async function loadMarcas() {
     nota: m.nota || "",
     instagram: m.instagram || "",
     whatsapp: m.whatsapp || "",
+    pagina_web: m.pagina_web || "",
     imagen: m.imagen || "",
     imagen_completa: !!m.imagen_completa,
     orden: m.orden != null ? Number(m.orden) : null
@@ -1324,6 +1348,7 @@ inscForm.addEventListener("submit", async (e) => {
     producto: g("producto"),
     precio: g("precio"),
     instagram: g("instagram") || null,
+    pagina_web: g("pagina_web") || null,
     whatsapp: g("whatsapp") || null,
     contacto: g("contacto")
   });
@@ -1486,6 +1511,7 @@ function startEdit(m) {
   admForm.producto.value = m.producto || "";
   admForm.precio.value = m.precio != null ? String(m.precio) : "";
   admForm.instagram.value = m.instagram || "";
+  admForm.pagina_web.value = m.pagina_web || "";
   admForm.whatsapp.value = m.whatsapp || "";
   admForm.nota.value = m.nota || "";
   admForm.orden.value = m.orden != null ? String(m.orden) : "";
@@ -1520,6 +1546,7 @@ admForm.addEventListener("submit", async (e) => {
       color: val("color") || "#793520",
       nota: val("nota") || null,
       instagram: val("instagram") || null,
+      pagina_web: val("pagina_web") || null,
       whatsapp: val("whatsapp") || null,
       imagen_completa: admForm.imagen_completa.checked,
       orden: val("orden") === "" ? null : (parseInt(val("orden").replace(/[^\d]/g, ""), 10) || null),
@@ -1616,7 +1643,7 @@ async function loadInscripciones() {
       <div class="adm-insc-h"><b>${esc(r.marca)}</b><time>${esc(fecha)}</time></div>
       <div class="adm-insc-meta">${esc(r.ciudad)} &middot; ${esc(r.producto)} &middot; $${esc(r.precio || "—")}</div>
       ${r.direccion ? `<div class="adm-insc-meta">📍 ${esc(r.direccion)}</div>` : ""}
-      <div class="adm-insc-meta">${esc(r.contacto)}${r.instagram ? " &middot; " + esc(r.instagram) : ""}${r.whatsapp ? " &middot; WA " + esc(r.whatsapp) : ""}</div>
+      <div class="adm-insc-meta">${esc(r.contacto)}${r.instagram ? " &middot; " + esc(r.instagram) : ""}${r.whatsapp ? " &middot; WA " + esc(r.whatsapp) : ""}${r.pagina_web ? " &middot; " + esc(r.pagina_web) : ""}</div>
       <div class="adm-insc-actions">
         ${r.estado === "nueva" ? `<button type="button" data-insc-aprob="${r.id}">Aprobar y publicar</button>` : ""}
         <button type="button" data-insc-arch="${r.id}">Archivar</button>
@@ -1636,7 +1663,7 @@ admInscList.addEventListener("click", async (e) => {
       await sb.from("marcas").insert({
         nombre: row.marca, ciudad: row.ciudad, direccion: row.direccion || null, producto: row.producto,
         precio: parseInt(String(row.precio || "").replace(/[^\d]/g, ""), 10) || 0,
-        instagram: row.instagram || null, whatsapp: row.whatsapp || null, color: "#793520", publicada: true
+        instagram: row.instagram || null, pagina_web: row.pagina_web || null, whatsapp: row.whatsapp || null, color: "#793520", publicada: true
       });
       await sb.from("inscripciones").update({ estado: "aprobada" }).eq("id", row.id);
       await Promise.all([loadMarcas(), loadAdminMarcas(), loadInscripciones()]);

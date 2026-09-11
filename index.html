@@ -934,6 +934,10 @@ revealIfImageLoads(document.getElementById("bulmapFab"));
 /* ---------- Helpers ---------- */
 const fmtPrecio = (n) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: MONEDA, maximumFractionDigits: 0 }).format(Number(n) || 0);
+// Marcas de servicios (sin precio fijo, quedó en $0): mostramos un llamado a conocer sus servicios en vez de "$0".
+const precioTag = (m) => (Number(m && m.precio) > 0)
+  ? `<span class="tag">${fmtPrecio(m.precio)}</span>`
+  : `<span class="tag">Conoce sus servicios</span>`;
 const fmtFecha = (x) => {
   const d = new Date(x);
   return isNaN(d.getTime()) ? "" : d.toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" });
@@ -1086,7 +1090,7 @@ function render() {
       <div class="card-body">
         <span class="prod-name">${esc(m.producto)}</span>
         <div class="card-foot">
-          <span class="tag">${fmtPrecio(m.precio)}</span>
+          ${precioTag(m)}
           ${waHtml(m)}
           ${igHtml(m)}
         </div>
@@ -1158,7 +1162,7 @@ function openModal(i) {
         ${m.nota ? `<p class="modal-note">${esc(m.nota)}</p>` : ""}
       </div>
       <div class="modal-foot">
-        <span><span class="prod-label">Precio en feria</span><span class="tag">${fmtPrecio(m.precio)}</span></span>
+        <span>${Number(m.precio) > 0 ? `<span class="prod-label">Precio en feria</span>` : ""}${precioTag(m)}</span>
         <span style="display:flex;gap:8px;flex-wrap:wrap">${waHtml(m)}${igHtml(m)}</span>
       </div>
     </div>`;

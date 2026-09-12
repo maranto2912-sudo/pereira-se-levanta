@@ -75,15 +75,7 @@
   .brandline { display: flex; flex-direction: column; line-height: 1.15; font-family: var(--font-mono); }
   .brandline b { font-size: 17px; font-weight: 700; letter-spacing: 0.01em; color: var(--ink); }
   .brand-sub { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2); }
-  .socials { display: inline-flex; align-items: center; gap: 8px; }
-  .ig-btn {
-    flex: none; display: inline-grid; place-items: center; width: 42px; height: 42px;
-    border: 1px solid var(--line); border-radius: 12px; color: var(--muted); text-decoration: none;
-    transition: color .14s ease, border-color .14s ease, background .14s ease;
-  }
-  .ig-btn svg { width: 20px; height: 20px; }
-  .ig-btn:hover { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
-  @media (max-width: 460px) { .socials { gap: 6px; } .ig-btn { width: 38px; height: 38px; } .ig-btn svg { width: 18px; height: 18px; } }
+  @media (max-width: 460px) { .socials { gap: 6px; } .ig-btn { width: 30px; height: 30px; } .ig-btn svg { width: 15px; height: 15px; } }
 
   /* Masthead */
   .masthead {
@@ -536,6 +528,16 @@
   .fab-bubble:hover { transform: scale(1.06); box-shadow: 0 14px 34px -8px rgb(var(--shadow-rgb) / 0.7); }
   @media (max-width: 560px) { .fab-bubble { width: 52px; height: 52px; right: 14px; bottom: 14px; } }
 
+  /* Burbujas de redes sociales apiladas encima de la de Bulmap */
+  .fab-bubble.fab-social {
+    display: grid; place-items: center; color: #fff; border: none;
+    bottom: calc(18px + (var(--stack, 0) * 68px));
+  }
+  .fab-bubble.fab-ig { background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+  .fab-bubble.fab-fb { background: #1877f2; }
+  .fab-bubble.fab-tt { background: #000; }
+  @media (max-width: 560px) { .fab-bubble.fab-social { bottom: calc(14px + (var(--stack, 0) * 62px)); } .fab-bubble.fab-social svg { width: 22px; height: 22px; } }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
@@ -550,28 +552,6 @@
       <span class="brandline">
         <span class="brand-sub">by</span>
         <b>Comunidad Sáchi</b>
-      </span>
-      <span class="socials">
-        <a class="ig-btn" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Kevin Sáchica">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-            <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
-          </svg>
-        </a>
-        <a class="ig-btn" href="https://www.facebook.com/share/19W6Kyx1VK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Kevin Sáchica">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M14.2 21v-6.2h2.05l.35-2.6H14.2v-1.6c0-.72.22-1.2 1.26-1.2H16.7V7.06c-.28-.04-1.06-.11-1.96-.11-1.94 0-3.27 1.18-3.27 3.36v1.89H9.4v2.6h2.07V21" fill="currentColor"/>
-          </svg>
-        </a>
-        <a class="ig-btn" href="https://www.tiktok.com/@kevin.sachica17" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Kevin Sáchica">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M13 6.5v8.25a2.25 2.25 0 1 1-2.25-2.25c.26 0 .5.04.75.12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M13 6.5c.35 1.7 1.7 3 3.5 3.15" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          </svg>
-        </a>
       </span>
     </span>
   </div>
@@ -865,7 +845,27 @@
   </div>
 </dialog>
 
-<!-- Burbuja flotante Bulmap -->
+<!-- Burbujas flotantes: redes de Kevin Sáchica + Bulmap, apiladas en la esquina -->
+<a class="fab-bubble fab-social fab-ig" href="https://www.instagram.com/kevinsachica_" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Kevin Sáchica" style="--stack:3">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+    <circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/>
+  </svg>
+</a>
+<a class="fab-bubble fab-social fab-fb" href="https://www.facebook.com/share/19W6Kyx1VK/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Kevin Sáchica" style="--stack:2">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+    <path d="M14.2 21v-6.2h2.05l.35-2.6H14.2v-1.6c0-.72.22-1.2 1.26-1.2H16.7V7.06c-.28-.04-1.06-.11-1.96-.11-1.94 0-3.27 1.18-3.27 3.36v1.89H9.4v2.6h2.07V21" fill="currentColor"/>
+  </svg>
+</a>
+<a class="fab-bubble fab-social fab-tt" href="https://www.tiktok.com/@kevin.sachica17" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Kevin Sáchica" style="--stack:1">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+    <path d="M13 6.5v8.25a2.25 2.25 0 1 1-2.25-2.25c.26 0 .5.04.75.12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13 6.5c.35 1.7 1.7 3 3.5 3.15" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  </svg>
+</a>
 <a class="fab-bubble" id="bulmapFab" href="https://linktr.ee/Bulmap" target="_blank" rel="noopener noreferrer" aria-label="Bulmap" hidden>
   <img src="bulmap.jpeg" alt="Bulmap">
 </a>
